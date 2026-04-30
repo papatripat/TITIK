@@ -1,65 +1,149 @@
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="min-h-[calc(100vh-4rem)]">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden">
+        {/* Background decorations */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-32">
+          <div className="text-center stagger-children">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-8">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              Hackathon Project 2026
+            </div>
+
+            {/* Title */}
+            <h1 className="text-5xl sm:text-7xl font-bold tracking-tight mb-6">
+              <span className="gradient-text">TITIK</span>
+              <br />
+              <span className="text-white text-3xl sm:text-5xl">
+                Temukan. Identifikasi. Tandai.
+              </span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-400 mb-12 leading-relaxed">
+              Sistem pemetaan & pelaporan sampah ilegal berbasis AI.
+              <br className="hidden sm:block" />
+              Ambil foto, biarkan AI menganalisis, dan tandai di peta.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/report"
+                className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold text-lg rounded-2xl shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all animate-pulse-glow"
+              >
+                📸 Laporkan Sampah
+              </Link>
+              <Link
+                href="/dashboard"
+                className="px-8 py-4 bg-slate-800/80 border border-slate-700 text-white font-bold text-lg rounded-2xl hover:bg-slate-700/80 hover:border-slate-600 transition-all"
+              >
+                🗺️ Lihat Dashboard
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-20 px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-4">
+            Cara Kerja
+          </h2>
+          <p className="text-center text-slate-400 mb-16 max-w-xl mx-auto">
+            Tiga langkah mudah untuk melaporkan sampah ilegal di sekitarmu
           </p>
+
+          <div className="grid sm:grid-cols-3 gap-8 stagger-children">
+            {[
+              {
+                step: "01",
+                icon: "📷",
+                title: "Ambil Foto",
+                desc: "Buka kamera dan foto langsung tumpukan sampah yang kamu temukan.",
+                color: "emerald",
+              },
+              {
+                step: "02",
+                icon: "🤖",
+                title: "Analisis AI",
+                desc: "Google Gemini AI akan mengklasifikasi jenis dan tingkat keparahan sampah.",
+                color: "cyan",
+              },
+              {
+                step: "03",
+                icon: "📍",
+                title: "Tandai di Peta",
+                desc: "Lokasi otomatis terdeteksi GPS dan ditampilkan di dashboard peta interaktif.",
+                color: "indigo",
+              },
+            ].map((item) => (
+              <div
+                key={item.step}
+                className="relative group glass-card rounded-2xl p-8 hover:border-emerald-500/30 transition-all duration-300"
+              >
+                {/* Step Number */}
+                <div className="absolute -top-3 -right-3 w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm shadow-lg">
+                  {item.step}
+                </div>
+                {/* Icon */}
+                <div className="text-5xl mb-5 group-hover:animate-float">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Tech Stack */}
+      <section className="py-20 px-4 sm:px-6 border-t border-slate-800">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-2xl font-bold text-white mb-8">
+            Dibangun dengan teknologi modern
+          </h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            {[
+              "Next.js",
+              "Tailwind CSS",
+              "Supabase",
+              "Leaflet.js",
+              "Google Gemini AI",
+            ].map((tech) => (
+              <span
+                key={tech}
+                className="px-5 py-2.5 rounded-xl bg-slate-800/50 border border-slate-700/50 text-slate-300 text-sm font-medium hover:border-emerald-500/30 hover:text-emerald-400 transition-colors"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 px-4 border-t border-slate-800 text-center text-slate-500 text-sm">
+        <p>
+          © 2026 TITIK — Spatial Waste Mapping System | Built for Hackathon
+        </p>
+      </footer>
     </div>
   );
 }

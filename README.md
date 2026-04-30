@@ -1,36 +1,152 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🗺️ TITIK — Spatial Waste Mapping & Reporting System
 
-## Getting Started
+<p align="center">
+  <strong>Temukan. Identifikasi. Tandai.</strong><br>
+  Sistem pemetaan & pelaporan sampah ilegal berbasis AI
+</p>
 
-First, run the development server:
+---
+
+## 📖 Deskripsi
+
+**TITIK** adalah aplikasi web mobile-first untuk melaporkan sampah ilegal. Pengguna cukup mengambil foto langsung dari kamera, dan AI (Google Gemini) akan menganalisis jenis serta tingkat keparahan sampah. Semua laporan ditampilkan di dashboard peta interaktif dengan marker berwarna.
+
+## ✨ Fitur Utama
+
+- 📸 **Laporan Sampah** — Ambil foto langsung dari kamera (bukan upload gallery)
+- 🤖 **Klasifikasi AI** — Google Gemini menganalisis severity dan jenis sampah
+- 📍 **Auto GPS** — Lokasi terdeteksi otomatis via browser
+- 🗺️ **Dashboard Peta** — Leaflet.js dengan marker berwarna (hijau/kuning/merah)
+- 🔄 **Auto-refresh** — Peta diperbarui otomatis setiap 30 detik
+
+## 🏗️ Tech Stack
+
+| Teknologi | Fungsi |
+|-----------|--------|
+| **Next.js** (App Router) | Framework frontend & API |
+| **Tailwind CSS** | Styling |
+| **Supabase** | Database & Storage |
+| **Leaflet.js** | Peta interaktif |
+| **Google Gemini AI** | Klasifikasi sampah |
+
+## 🚀 Setup & Jalankan
+
+### Prerequisites
+
+- Node.js 18+
+- npm
+- Akun [Supabase](https://supabase.com)
+- API Key [Google AI Studio](https://aistudio.google.com/apikey)
+
+### 1. Clone & Install
+
+```bash
+git clone <repo-url>
+cd titik
+npm install
+```
+
+### 2. Setup Supabase
+
+1. Buat project baru di [Supabase Dashboard](https://supabase.com/dashboard)
+2. Buka **SQL Editor** dan jalankan isi file `supabase-schema.sql`
+3. Buat Storage bucket:
+   - Buka **Storage** → **New Bucket**
+   - Nama: `report-images`
+   - Set sebagai **Public**
+4. Tambahkan Storage policies:
+   - Allow **INSERT** untuk role `anon` → policy: `true`
+   - Allow **SELECT** untuk role `anon` → policy: `true`
+5. Copy **Project URL** dan **Anon Key** dari **Settings → API**
+
+### 3. Konfigurasi Environment
+
+Copy file `.env.example` ke `.env.local` dan isi:
+
+```bash
+cp .env.example .env.local
+```
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGci...
+GEMINI_API_KEY=AIzaSy...
+```
+
+### 4. Jalankan Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka [http://localhost:3000](http://localhost:3000) di browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📱 Demo Flow
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Buka halaman **Lapor** (`/report`)
+2. Klik "Buka Kamera" → izinkan akses kamera
+3. Ambil foto tumpukan sampah
+4. Lokasi GPS terdeteksi otomatis
+5. Klik "Kirim Laporan"
+6. AI menganalisis → hasil ditampilkan (severity, jenis, confidence)
+7. Data tersimpan ke database
+8. Buka **Dashboard** (`/dashboard`) → marker muncul di peta
 
-## Learn More
+## 📦 Struktur Project
 
-To learn more about Next.js, take a look at the following resources:
+```
+titik/
+├── src/
+│   ├── app/
+│   │   ├── api/reports/    # API route (POST & GET)
+│   │   ├── dashboard/      # Halaman peta
+│   │   ├── report/         # Halaman pelaporan
+│   │   ├── globals.css     # Global styles
+│   │   ├── layout.tsx      # Root layout
+│   │   └── page.tsx        # Home page
+│   ├── components/
+│   │   ├── CameraCapture.tsx   # Komponen kamera
+│   │   ├── MapDashboard.tsx    # Komponen peta
+│   │   ├── Navbar.tsx          # Navigation bar
+│   │   └── ReportForm.tsx      # Form pelaporan
+│   └── lib/
+│       ├── gemini.ts       # Gemini AI config
+│       └── supabase.ts     # Supabase client
+├── supabase-schema.sql     # Database schema
+├── .env.example            # Template env variables
+└── README.md
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Severity Legend
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Level | Warna | Deskripsi |
+|-------|-------|-----------|
+| 1 | 🟢 Hijau | Kecil / minimal |
+| 2 | 🟡 Kuning | Sedang |
+| 3 | 🔴 Merah | Besar / kritis |
 
-## Deploy on Vercel
+## 📊 Data Model
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```sql
+reports
+├── id          UUID (primary key)
+├── image_url   TEXT
+├── latitude    DOUBLE PRECISION
+├── longitude   DOUBLE PRECISION
+├── severity    INTEGER (1-3)
+├── waste_type  TEXT (plastic/organic/mixed)
+├── confidence  INTEGER (0-100)
+└── created_at  TIMESTAMPTZ
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ⚠️ Catatan
+
+- Aplikasi ini adalah **MVP untuk hackathon**, bukan production system
+- Kamera hanya bisa digunakan via HTTPS atau localhost
+- Pastikan izin kamera dan GPS aktif di browser
+
+---
+
+<p align="center">
+  Built with ❤️ for Hackathon 2026
+</p>
