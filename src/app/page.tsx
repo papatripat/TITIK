@@ -20,14 +20,17 @@ export default function Home() {
               Hackathon Project 2026
             </div>
 
-            {/* Title */}
-            <h1 className="text-5xl sm:text-7xl font-bold tracking-tight mb-6">
-              <span className="gradient-text">TITIK</span>
-              <br />
-              <span className="text-white text-3xl sm:text-5xl">
-                Temukan. Identifikasi. Tandai.
-              </span>
-            </h1>
+            {/* Logo and Title */}
+            <div className="flex flex-col items-center justify-center mb-6">
+              <img src="/logo.png" alt="TITIK Logo" className="w-32 h-32 md:w-40 md:h-40 object-contain mb-8 animate-float" />
+              <h1 className="text-5xl sm:text-7xl font-bold tracking-tight">
+                <span className="gradient-text">TITIK</span>
+                <br />
+                <span className="text-white text-3xl sm:text-5xl">
+                  Temukan. Identifikasi. Tandai. Informasikan. Kirimkan.
+                </span>
+              </h1>
+            </div>
 
             {/* Subtitle */}
             <p className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-400 mb-12 leading-relaxed">
