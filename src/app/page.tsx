@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { IconCamera, IconRobot, IconLocationPin, IconMap } from "@/lib/icons";
 
 export default function Home() {
   return (
@@ -34,7 +35,7 @@ export default function Home() {
 
             {/* Subtitle */}
             <p className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-400 mb-12 leading-relaxed">
-              Sistem pemetaan & pelaporan sampah ilegal berbasis AI.
+              Sistem pemetaan &amp; pelaporan sampah ilegal berbasis AI.
               <br className="hidden sm:block" />
               Ambil foto, biarkan AI menganalisis, dan tandai di peta.
             </p>
@@ -43,15 +44,17 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/report"
-                className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold text-lg rounded-2xl shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all animate-pulse-glow"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold text-lg rounded-2xl shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all animate-pulse-glow"
               >
-                📸 Laporkan Sampah
+                <IconCamera size={22} className="text-white" />
+                Laporkan Sampah
               </Link>
               <Link
                 href="/dashboard"
-                className="px-8 py-4 bg-slate-800/80 border border-slate-700 text-white font-bold text-lg rounded-2xl hover:bg-slate-700/80 hover:border-slate-600 transition-all"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-800/80 border border-slate-700 text-white font-bold text-lg rounded-2xl hover:bg-slate-700/80 hover:border-slate-600 transition-all"
               >
-                🗺️ Lihat Dashboard
+                <IconMap size={22} className="text-white" />
+                Lihat Dashboard
               </Link>
             </div>
           </div>
@@ -72,21 +75,21 @@ export default function Home() {
             {[
               {
                 step: "01",
-                icon: "📷",
+                icon: <IconCamera size={40} className="text-emerald-400" />,
                 title: "Ambil Foto",
                 desc: "Buka kamera dan foto langsung tumpukan sampah yang kamu temukan.",
                 color: "emerald",
               },
               {
                 step: "02",
-                icon: "🤖",
+                icon: <IconRobot size={40} className="text-cyan-400" />,
                 title: "Analisis AI",
                 desc: "Google Gemini AI akan mengklasifikasi jenis dan tingkat keparahan sampah.",
                 color: "cyan",
               },
               {
                 step: "03",
-                icon: "📍",
+                icon: <IconLocationPin size={40} className="text-indigo-400" />,
                 title: "Tandai di Peta",
                 desc: "Lokasi otomatis terdeteksi GPS dan ditampilkan di dashboard peta interaktif.",
                 color: "indigo",
@@ -101,7 +104,7 @@ export default function Home() {
                   {item.step}
                 </div>
                 {/* Icon */}
-                <div className="text-5xl mb-5 group-hover:animate-float">
+                <div className="mb-5 group-hover:animate-float">
                   {item.icon}
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">
@@ -144,7 +147,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-slate-800 text-center text-slate-500 text-sm">
         <p>
-          © 2026 TITIK — Spatial Waste Mapping System | Built for Hackathon
+          &copy; 2026 TITIK — Spatial Waste Mapping System | Built for Hackathon
         </p>
       </footer>
     </div>

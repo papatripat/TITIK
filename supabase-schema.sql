@@ -33,6 +33,14 @@ CREATE POLICY "Allow public insert access"
     TO anon
     WITH CHECK (true);
 
+-- Allow anyone to delete reports (for admin panel in hackathon demo)
+-- In production, restrict this to authenticated admin users only
+CREATE POLICY "Allow public delete access"
+    ON reports
+    FOR DELETE
+    TO anon
+    USING (true);
+
 -- 4. Create index for faster queries
 CREATE INDEX idx_reports_created_at ON reports (created_at DESC);
 CREATE INDEX idx_reports_severity ON reports (severity);

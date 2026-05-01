@@ -1,18 +1,28 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useAuth } from '@/lib/auth-context';
+import { IconHome, IconCamera, IconMap, IconLogout } from '@/lib/icons';
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { role, email, logout, isLoading } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   const links = [
-    { href: '/', label: 'Beranda', icon: '🏠' },
-    { href: '/report', label: 'Lapor', icon: '📸' },
-    { href: '/dashboard', label: 'Dashboard', icon: '🗺️' },
+    { href: '/', label: 'Beranda', icon: <IconHome size={16} /> },
+    { href: '/report', label: 'Lapor', icon: <IconCamera size={16} /> },
+    { href: '/dashboard', label: 'Dashboard', icon: <IconMap size={16} /> },
   ];
+
+  const handleLogout = () => {
+    logout();
+    router.push('/');
+    setIsOpen(false);
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-slate-900/80 border-b border-slate-700/50">
@@ -34,16 +44,67 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                   pathname === link.href
                     ? 'bg-emerald-500/15 text-emerald-400 shadow-inner'
                     : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
                 }`}
               >
-                <span className="mr-1.5">{link.icon}</span>
+                {link.icon}
                 {link.label}
               </Link>
             ))}
+
+            {/* Auth section */}
+            {!isLoading && (
+              <>
+                {role === 'guest' ? (
+                  <Link
+                    href="/login"
+                    className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                      pathname === '/login'
+                        ? 'bg-emerald-500/15 text-emerald-400 shadow-inner'
+                        : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                    }`}
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" />
+                      <polyline points="10 17 15 12 10 7" />
+                      <line x1="15" y1="12" x2="3" y2="12" />
+                    </svg>
+                    Masuk
+                  </Link>
+                ) : (
+                  <div className="flex items-center gap-1 ml-2 pl-2 border-l border-slate-700">
+                    {role === 'admin' && (
+                      <Link
+                        href="/admin"
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                          pathname === '/admin'
+                            ? 'bg-amber-500/15 text-amber-400'
+                            : 'bg-amber-500/10 text-amber-400/80 hover:bg-amber-500/20 hover:text-amber-400'
+                        }`}
+                      >
+                        <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                        Admin
+                      </Link>
+                    )}
+                    <span className="text-xs text-slate-500 px-2 hidden lg:inline truncate max-w-[140px]">
+                      {email}
+                    </span>
+                    <button
+                      onClick={handleLogout}
+                      className="p-2 rounded-lg text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-all"
+                      title="Keluar"
+                    >
+                      <IconLogout size={16} />
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
           </div>
 
           {/* Mobile Toggle */}
@@ -70,16 +131,62 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className={`block px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                   pathname === link.href
                     ? 'bg-emerald-500/15 text-emerald-400'
                     : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
                 }`}
               >
-                <span className="mr-2">{link.icon}</span>
+                {link.icon}
                 {link.label}
               </Link>
             ))}
+
+            {/* Mobile Auth */}
+            {!isLoading && (
+              <>
+                {role === 'guest' ? (
+                  <Link
+                    href="/login"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-emerald-400 bg-emerald-500/10"
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" />
+                      <polyline points="10 17 15 12 10 7" />
+                      <line x1="15" y1="12" x2="3" y2="12" />
+                    </svg>
+                    Masuk
+                  </Link>
+                ) : (
+                  <>
+                    {role === 'admin' && (
+                      <Link
+                        href="/admin"
+                        onClick={() => setIsOpen(false)}
+                        className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium ${
+                          pathname === '/admin'
+                            ? 'bg-amber-500/15 text-amber-400'
+                            : 'text-amber-400/80 hover:bg-amber-500/10'
+                        }`}
+                      >
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
+                        Admin Dashboard
+                      </Link>
+                    )}
+                    <button
+                      onClick={handleLogout}
+                      className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:bg-red-500/10 w-full text-left"
+                    >
+                      <IconLogout size={16} />
+                      Keluar ({email})
+                    </button>
+                  </>
+                )}
+              </>
+            )}
           </div>
         )}
       </div>

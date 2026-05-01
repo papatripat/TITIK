@@ -125,9 +125,13 @@ export default function CameraCapture({ onCapture, onClear, capturedImage }: Cam
               </p>
               <button
                 onClick={startCamera}
-                className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold rounded-xl shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold rounded-xl shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all"
               >
-                📷 Buka Kamera
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" />
+                  <circle cx="12" cy="13" r="4" />
+                </svg>
+                Buka Kamera
               </button>
             </div>
           )}
@@ -143,16 +147,24 @@ export default function CameraCapture({ onCapture, onClear, capturedImage }: Cam
             className="w-full aspect-[4/3] object-cover"
           />
           <div className="absolute top-3 right-3">
-            <span className="px-3 py-1 bg-emerald-500/90 text-white text-xs font-semibold rounded-full backdrop-blur-sm">
-              ✓ Foto diambil
+            <span className="inline-flex items-center gap-1 px-3 py-1 bg-emerald-500/90 text-white text-xs font-semibold rounded-full backdrop-blur-sm">
+              <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Foto diambil
             </span>
           </div>
           <div className="absolute bottom-3 left-0 right-0 flex justify-center">
             <button
               onClick={retakePhoto}
-              className="px-4 py-2 bg-slate-900/80 backdrop-blur-sm text-white text-sm font-medium rounded-xl border border-slate-600 hover:bg-slate-800 transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-900/80 backdrop-blur-sm text-white text-sm font-medium rounded-xl border border-slate-600 hover:bg-slate-800 transition-colors"
             >
-              🔄 Ambil Ulang
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="23 4 23 10 17 10" />
+                <polyline points="1 20 1 14 7 14" />
+                <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
+              </svg>
+              Ambil Ulang
             </button>
           </div>
         </div>
@@ -160,8 +172,13 @@ export default function CameraCapture({ onCapture, onClear, capturedImage }: Cam
 
       {/* Error */}
       {error && (
-        <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
-          ⚠️ {error}
+        <div className="flex items-center gap-2 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
+          <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+          {error}
         </div>
       )}
 

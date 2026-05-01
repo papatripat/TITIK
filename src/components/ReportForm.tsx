@@ -31,7 +31,7 @@ export default function ReportForm() {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
-        setLocationStatus('Lokasi terdeteksi ✓');
+        setLocationStatus('Lokasi terdeteksi');
       },
       (err) => {
         console.error('GPS error:', err);
@@ -107,6 +107,38 @@ export default function ReportForm() {
     mixed: 'Campuran',
   };
 
+  // Waste type icons as SVG
+  const wasteTypeIcon = (type: string) => {
+    if (type === 'plastic') {
+      return (
+        <svg className="w-8 h-8 text-blue-400 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+          <path d="M7.5 7.5l4.5-5 4.5 5" />
+          <path d="M12 2.5v10" />
+          <path d="M18.5 14l1.5 5.5-5.5 1.5" />
+          <path d="M20 19.5l-8-5" />
+          <path d="M5.5 14L4 19.5 9.5 21" />
+          <path d="M4 19.5l8-5" />
+        </svg>
+      );
+    }
+    if (type === 'organic') {
+      return (
+        <svg className="w-8 h-8 text-green-400 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+          <path d="M11 20A7 7 0 019.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-3.8 10-10 10z" />
+          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+        </svg>
+      );
+    }
+    return (
+      <svg className="w-8 h-8 text-slate-400 mx-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="3 6 5 6 21 6" />
+        <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
+        <line x1="10" y1="11" x2="10" y2="17" />
+        <line x1="14" y1="11" x2="14" y2="17" />
+      </svg>
+    );
+  };
+
   return (
     <div className="max-w-lg mx-auto space-y-6">
       {/* Step Indicator */}
@@ -153,7 +185,15 @@ export default function ReportForm() {
               ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
               : 'bg-slate-800 border-slate-700 text-slate-400'
           }`}>
-            <span className="text-lg">{location ? '📍' : '⏳'}</span>
+            {location ? (
+              <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5 shrink-0 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 12a9 9 0 11-6.219-8.56" />
+              </svg>
+            )}
             <div>
               <p className="text-sm font-medium">{locationStatus}</p>
               {location && (
@@ -166,8 +206,13 @@ export default function ReportForm() {
 
           {/* Error */}
           {error && (
-            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
-              ⚠️ {error}
+            <div className="flex items-center gap-2 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
+              <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+              {error}
             </div>
           )}
 
@@ -190,7 +235,15 @@ export default function ReportForm() {
                 Menganalisis dengan AI...
               </span>
             ) : (
-              '🚀 Kirim Laporan'
+              <span className="inline-flex items-center gap-2">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z" />
+                  <path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z" />
+                  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                </svg>
+                Kirim Laporan
+              </span>
             )}
           </button>
         </>
@@ -201,7 +254,10 @@ export default function ReportForm() {
             {/* Success Header */}
             <div className="text-center p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl">
               <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                <span className="text-3xl">✅</span>
+                <svg className="w-8 h-8 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
               </div>
               <h3 className="text-xl font-bold text-white">Laporan Terkirim!</h3>
               <p className="text-slate-400 text-sm mt-1">AI telah menganalisis sampah yang dilaporkan</p>
@@ -220,9 +276,9 @@ export default function ReportForm() {
               </div>
               <div className="p-4 rounded-xl border bg-slate-800/50 border-slate-700/50 text-center">
                 <p className="text-xs text-slate-400 mb-1">Jenis</p>
-                <p className="text-2xl">
-                  {result.waste_type === 'plastic' ? '♻️' : result.waste_type === 'organic' ? '🍂' : '🗑️'}
-                </p>
+                <div className="py-1">
+                  {wasteTypeIcon(result.waste_type)}
+                </div>
                 <p className="text-xs font-medium text-white">
                   {wasteTypeLabels[result.waste_type] || result.waste_type}
                 </p>
@@ -245,15 +301,24 @@ export default function ReportForm() {
             <div className="flex gap-3">
               <button
                 onClick={handleReset}
-                className="flex-1 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold rounded-xl shadow-lg hover:scale-[1.01] active:scale-[0.99] transition-all"
+                className="flex-1 inline-flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold rounded-xl shadow-lg hover:scale-[1.01] active:scale-[0.99] transition-all"
               >
-                📸 Lapor Lagi
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" />
+                  <circle cx="12" cy="13" r="4" />
+                </svg>
+                Lapor Lagi
               </button>
               <a
                 href="/dashboard"
-                className="flex-1 py-3 bg-slate-700 text-white font-semibold rounded-xl text-center hover:bg-slate-600 transition-colors"
+                className="flex-1 inline-flex items-center justify-center gap-2 py-3 bg-slate-700 text-white font-semibold rounded-xl text-center hover:bg-slate-600 transition-colors"
               >
-                🗺️ Lihat Peta
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+                  <line x1="8" y1="2" x2="8" y2="18" />
+                  <line x1="16" y1="6" x2="16" y2="22" />
+                </svg>
+                Lihat Peta
               </a>
             </div>
           </div>
