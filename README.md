@@ -1,7 +1,7 @@
 # 🗺️ TITIK — Spatial Waste Mapping & Reporting System
 
 <p align="center">
-  <strong>Temukan. Identifikasi. Tandai.</strong><br>
+  <strong>Temukan. Identifikasi. Tandai. Informasikan. Kirimkan</strong><br>
   Sistem pemetaan & pelaporan sampah ilegal berbasis AI
 </p>
 
