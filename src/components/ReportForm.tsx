@@ -146,23 +146,21 @@ export default function ReportForm() {
         {['Foto', 'Analisis AI', 'Hasil'].map((label, i) => (
           <div key={label} className="flex items-center gap-2">
             <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                i === 0 && step === 'capture'
-                  ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30'
-                  : i === 1 && step === 'submitting'
+              className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${i === 0 && step === 'capture'
+                ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30'
+                : i === 1 && step === 'submitting'
                   ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/30 animate-pulse'
                   : i === 2 && step === 'result'
-                  ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30'
-                  : 'bg-slate-700 text-slate-400'
-              }`}
+                    ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30'
+                    : 'bg-slate-700 text-slate-400'
+                }`}
             >
               {i + 1}
             </div>
-            <span className={`hidden sm:inline ${
-              (i === 0 && step === 'capture') || (i === 1 && step === 'submitting') || (i === 2 && step === 'result')
-                ? 'text-white'
-                : 'text-slate-500'
-            }`}>
+            <span className={`hidden sm:inline ${(i === 0 && step === 'capture') || (i === 1 && step === 'submitting') || (i === 2 && step === 'result')
+              ? 'text-white'
+              : 'text-slate-500'
+              }`}>
               {label}
             </span>
             {i < 2 && <div className="w-8 h-px bg-slate-700" />}
@@ -180,11 +178,10 @@ export default function ReportForm() {
           />
 
           {/* Location Status */}
-          <div className={`flex items-center gap-3 p-3 rounded-xl border ${
-            location
+          <div className={`flex items-center gap-3 p-3 rounded-xl border ${location
               ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
               : 'bg-slate-800 border-slate-700 text-slate-400'
-          }`}>
+            }`}>
             {location ? (
               <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
@@ -220,11 +217,10 @@ export default function ReportForm() {
           <button
             onClick={handleSubmit}
             disabled={!capturedImage || !location || isSubmitting}
-            className={`w-full py-4 rounded-2xl text-white font-bold text-lg transition-all ${
-              capturedImage && location && !isSubmitting
-                ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.01] active:scale-[0.99]'
-                : 'bg-slate-700 cursor-not-allowed opacity-60'
-            }`}
+            className={`w-full py-4 rounded-2xl text-white font-bold text-lg transition-all ${capturedImage && location && !isSubmitting
+              ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.01] active:scale-[0.99]'
+              : 'bg-slate-700 cursor-not-allowed opacity-60'
+              }`}
           >
             {isSubmitting ? (
               <span className="flex items-center justify-center gap-3">

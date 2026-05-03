@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { supabase } from '@/lib/supabase';
 
 export async function DELETE(
@@ -15,11 +16,12 @@ export async function DELETE(
       );
     }
 
-    // Attempt to delete the report from the database
-    const { error } = await supabase
+    // Attempt to delete the report from the database and return the deleted row
+    const { data, error } = await supabase
       .from('reports')
       .delete()
-      .eq('id', id);
+      .eq('id', id)
+      .select();
 
     if (error) {
       console.error('Delete error:', error);
@@ -28,6 +30,19 @@ export async function DELETE(
         { status: 500 }
       );
     }
+
+    if (!data || data.length === 0) {
+      // If no data is returned, it means RLS prevented the delete or ID doesn't exist
+      console.error('Delete blocked by RLS or ID not found');
+      return NextResponse.json(
+        { error: 'Akses ditolak (Policy RLS DELETE belum diaktifkan di Supabase)' },
+        { status: 403 }
+      );
+    }
+
+    // Revalidate the dashboard and API paths to clear Next.js cache
+    revalidatePath('/dashboard');
+    revalidatePath('/api/reports');
 
     return NextResponse.json({ success: true });
   } catch (error) {

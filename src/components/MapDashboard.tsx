@@ -147,7 +147,7 @@ export default function MapDashboard() {
 
   const fetchReports = useCallback(async () => {
     try {
-      const response = await fetch('/api/reports', { cache: 'no-store' });
+      const response = await fetch(`/api/reports?_t=${Date.now()}`, { cache: 'no-store' });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Failed to fetch');
       setReports(data.reports || []);

@@ -56,7 +56,7 @@ export default function AdminDashboard() {
   const fetchReports = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/reports', { cache: 'no-store' });
+      const res = await fetch(`/api/reports?_t=${Date.now()}`, { cache: 'no-store' });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       setReports(data.reports || []);
@@ -84,6 +84,7 @@ export default function AdminDashboard() {
       setReports((prev) => prev.filter((r) => r.id !== id));
       setDeleteId(null);
       showNotification('success', 'Laporan berhasil dihapus');
+      router.refresh(); // Force Next.js router to clear client cache
     } catch (err) {
       console.error('Delete error:', err);
       showNotification('error', 'Gagal menghapus laporan');
