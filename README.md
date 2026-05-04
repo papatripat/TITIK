@@ -48,7 +48,7 @@ Pastikan Anda sudah menginstal:
 ### 1. Clone & Install Dependencies
 Buka terminal Anda dan jalankan perintah berikut:
 ```bash
-git clone <url-repository-anda>
+git clone <https://github.com/papatripat/TITIK>
 cd titik
 npm install
 ```
