@@ -5,6 +5,10 @@
   Sistem pemetaan & pelaporan sampah ilegal berbasis AI
 </p>
 
+<p align="center">
+  🌐 <strong>Live Demo:</strong> <a href="https://titik-demo.vercel.app">https://titik-demo.vercel.app</a>
+</p>
+
 ---
 
 ## 📖 Deskripsi
