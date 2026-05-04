@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Providers from "@/components/Providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,6 +19,8 @@ export const metadata: Metadata = {
     "Laporkan sampah ilegal di sekitarmu. AI akan menganalisis dan memetakan lokasi untuk penanganan yang lebih cepat.",
   keywords: ["sampah", "ilegal", "pemetaan", "AI", "laporan", "lingkungan"],
 };
+
+import Providers from "@/components/Providers";
 
 export default function RootLayout({
   children,

@@ -1,7 +1,7 @@
 # 🗺️ TITIK — Spatial Waste Mapping & Reporting System
 
 <p align="center">
-  <strong>Temukan. Identifikasi. Tandai. Informasikan. Kirimkan</strong><br>
+  <strong>Temukan. Identifikasi. Tandai.</strong><br>
   Sistem pemetaan & pelaporan sampah ilegal berbasis AI
 </p>
 
@@ -41,7 +41,7 @@
 ### 1. Clone & Install
 
 ```bash
-git clone <https://github.com/papatripat/TITIK>
+git clone <repo-url>
 cd titik
 npm install
 ```
@@ -148,5 +148,5 @@ reports
 ---
 
 <p align="center">
-  Built with ❤️ for Hackathon 2026
+  Built with ❤️ for IYREF Hackathon 2026
 </p>

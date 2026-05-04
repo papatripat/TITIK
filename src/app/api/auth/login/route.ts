@@ -7,8 +7,10 @@ export const dynamic = 'force-dynamic';
 // Any other valid-looking email+password → regular user
 // ─────────────────────────────────────────────────────────────────────────────
 
-const ADMIN_EMAIL = 'sipalingnanda@gmail.com';
-const ADMIN_PASSWORD = 'dickyganteng77';
+const ADMIN_CREDENTIALS = [
+  { email: 'sipalingnanda@gmail.com', password: 'dickyganteng77' },
+  { email: 'admintitik@gmail.com', password: 'akuadmin123' }
+];
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,7 +25,11 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if admin credentials
-    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+    const isAdmin = ADMIN_CREDENTIALS.some(
+      (cred) => cred.email === email && cred.password === password
+    );
+
+    if (isAdmin) {
       return NextResponse.json({
         success: true,
         role: 'admin',
