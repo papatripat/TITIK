@@ -137,9 +137,9 @@ export default function MapDashboard() {
   const [showChoropleth, setShowChoropleth] = useState(true);
   const [geoData, setGeoData] = useState<FeatureCollection<Polygon, DistrictProperties> | null>(null);
 
-  // Load GeoJSON data for Jawa Timur
+  // Load GeoJSON data for seluruh Jawa
   useEffect(() => {
-    fetch('/data/jatim-kabkota.geojson')
+    fetch('/data/jawa-kabkota.geojson')
       .then((res) => res.json())
       .then((data) => setGeoData(data))
       .catch((err) => console.error('Failed to load GeoJSON:', err));
@@ -194,7 +194,7 @@ export default function MapDashboard() {
       <div className="flex items-center justify-center h-[60vh]">
         <div className="text-center space-y-4">
           <div className="w-12 h-12 mx-auto border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin" />
-          <p className="text-slate-400">Memuat peta Jawa Timur...</p>
+          <p className="text-slate-400">Memuat peta Pulau Jawa...</p>
         </div>
       </div>
     );
@@ -238,7 +238,7 @@ export default function MapDashboard() {
               <polyline points="2 17 12 22 22 17" />
               <polyline points="2 12 12 17 22 12" />
             </svg>
-            Zona Wilayah Jawa Timur
+            Zona Wilayah Pulau Jawa
           </button>
           <span className="text-xs text-slate-600">
             {geoData ? `${geoData.features.length} kabupaten/kota` : 'Memuat...'}
@@ -254,11 +254,11 @@ export default function MapDashboard() {
         )}
       </div>
 
-      {/* Map — centered on Jawa Timur */}
+      {/* Map — centered on Pulau Jawa */}
       <div className="rounded-2xl overflow-hidden border border-slate-700/50 shadow-2xl">
         <MapContainer
-          center={[-7.55, 112.75]}
-          zoom={8}
+          center={[-7.15, 110.14]}
+          zoom={7}
           style={{ height: '65vh', width: '100%' }}
           className="z-0"
         >
@@ -266,7 +266,7 @@ export default function MapDashboard() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {/* Choropleth zones for all Jawa Timur */}
+          {/* Choropleth zones for all Pulau Jawa */}
           {showChoropleth && geoData && <ChoroplethLayer reports={reports} geoData={geoData} />}
           {reports.length > 0 && <FitBounds reports={reports} />}
           {reports.map((report) => (
