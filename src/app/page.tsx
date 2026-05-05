@@ -119,30 +119,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Tech Stack */}
-      <section className="py-20 px-4 sm:px-6 border-t border-slate-800">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-white mb-8">
-            Dibangun dengan teknologi modern
-          </h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {[
-              "Next.js",
-              "Tailwind CSS",
-              "Supabase",
-              "Leaflet.js",
-              "Google Gemini AI",
-            ].map((tech) => (
-              <span
-                key={tech}
-                className="px-5 py-2.5 rounded-xl bg-slate-800/50 border border-slate-700/50 text-slate-300 text-sm font-medium hover:border-emerald-500/30 hover:text-emerald-400 transition-colors"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-slate-800 text-center text-slate-500 text-sm">

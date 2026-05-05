@@ -228,8 +228,8 @@ export default function MapDashboard() {
           <button
             onClick={() => setShowChoropleth(!showChoropleth)}
             className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${showChoropleth
-                ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
-                : 'bg-slate-800/50 text-slate-400 border border-slate-700/50 hover:text-white'
+              ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
+              : 'bg-slate-800/50 text-slate-400 border border-slate-700/50 hover:text-white'
               }`}
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
