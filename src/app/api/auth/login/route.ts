@@ -37,17 +37,9 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Any other credentials → regular user (for demo, accept anything)
-    if (password.length >= 4) {
-      return NextResponse.json({
-        success: true,
-        role: 'user',
-        redirect: '/',
-      });
-    }
-
+    // Not admin → return 401 so /signin falls through to Supabase Auth
     return NextResponse.json(
-      { error: 'Password minimal 4 karakter' },
+      { error: 'Bukan admin' },
       { status: 401 }
     );
   } catch (error) {

@@ -5,9 +5,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { IconLock, IconWarning } from '@/lib/icons';
+import { useAuth } from '@/lib/auth-context';
 
 export default function SignInPage() {
   const router = useRouter();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -19,6 +21,16 @@ export default function SignInPage() {
     setError(null);
 
     try {
+      // 1. Coba login sebagai Admin (hardcoded credentials)
+      const adminResult = await login(email, password);
+
+      if (adminResult.success) {
+        // Berhasil login sebagai admin → redirect ke admin dashboard
+        router.push('/admin');
+        return;
+      }
+
+      // 2. Jika bukan admin, coba login via Supabase Auth (user biasa)
       const { error: signInError } = await supabase.auth.signInWithPassword({
         email,
         password,
