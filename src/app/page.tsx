@@ -14,7 +14,7 @@ export default function Home() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col items-center text-center stagger-children">
-            
+
             {/* Logo Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700/50 text-slate-300 text-sm font-medium mb-10">
               <img src="/logo.png" alt="TITIK Logo" className="w-5 h-5 object-contain" />
@@ -25,20 +25,20 @@ export default function Home() {
             <h1 className="text-[3rem] sm:text-[5rem] md:text-[6.5rem] font-black tracking-tighter leading-[1.05] text-white mb-10">
               Your Small
               <span className="inline-block align-middle mx-3 sm:mx-6 w-28 h-12 sm:w-48 sm:h-24 rounded-full overflow-hidden border-[3px] sm:border-[4px] border-slate-800/80 shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:scale-105 transition-transform duration-500">
-                <img 
-                  src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80" 
-                  alt="Beautiful Nature" 
+                <img
+                  src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80"
+                  alt="Beautiful Nature"
                   className="w-full h-full object-cover scale-110"
                 />
               </span>
-              Actions<br/>
-              Can Keep <span className="text-emerald-400">Indonesia</span><br/>
+              Actions<br />
+              Can Keep <span className="text-emerald-400">Indonesia</span><br />
               Clean & Green
             </h1>
 
             {/* Subtitle */}
             <p className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-400 mb-12 font-medium">
-              Dispose of your waste properly and help us protect the environment. 
+              Dispose of your waste properly and help us protect the environment.
               Snap a photo, let AI identify it, and map it for a better future.
             </p>
 
@@ -85,23 +85,23 @@ export default function Home() {
         {/* Gradient Masks */}
         <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#0b1120] to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#0b1120] to-transparent z-10 pointer-events-none" />
-        
+
         <div className="flex w-[200%] animate-marquee hover:[animation-play-state:paused]">
           {[...Array(2)].map((_, groupIdx) => (
             <div key={groupIdx} className="flex w-1/2 justify-around gap-4 px-2">
               {[
                 "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=400&h=300&q=80",
                 "https://images.unsplash.com/photo-1604187351574-c75ca79f5807?auto=format&fit=crop&w=400&h=300&q=80",
-                "https://images.unsplash.com/photo-1618477461853-cf6ed80fbea5?auto=format&fit=crop&w=400&h=300&q=80",
+                "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&w=400&h=300&q=80",
                 "https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=400&h=300&q=80",
                 "https://images.unsplash.com/photo-1536882240095-0379873feb4e?auto=format&fit=crop&w=400&h=300&q=80",
                 "https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?auto=format&fit=crop&w=400&h=300&q=80"
               ].map((src, idx) => (
                 <div key={`${groupIdx}-${idx}`} className="w-48 sm:w-64 shrink-0 aspect-[4/3] rounded-2xl overflow-hidden border border-slate-700/50 relative group/marquee cursor-pointer">
-                  <img 
-                    src={src} 
-                    alt="Illegal Waste Dump" 
-                    className="w-full h-full object-cover grayscale opacity-70 group-hover/marquee:grayscale-0 group-hover/marquee:opacity-100 group-hover/marquee:scale-110 transition-all duration-500" 
+                  <img
+                    src={src}
+                    alt="Illegal Waste Dump"
+                    className="w-full h-full object-cover grayscale opacity-70 group-hover/marquee:grayscale-0 group-hover/marquee:opacity-100 group-hover/marquee:scale-110 transition-all duration-500"
                   />
                   <div className="absolute inset-0 bg-emerald-500/20 opacity-0 group-hover/marquee:opacity-100 transition-opacity duration-300 mix-blend-overlay" />
                 </div>
