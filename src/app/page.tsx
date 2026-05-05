@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { IconCamera, IconRobot, IconLocationPin, IconMap } from "@/lib/icons";
+import { IconCamera, IconRobot, IconLocationPin, IconMap, IconTrashBin } from "@/lib/icons";
 
 export default function Home() {
   return (
@@ -87,10 +87,10 @@ export default function Home() {
             Cara Kerja
           </h2>
           <p className="text-center text-slate-400 mb-16 max-w-xl mx-auto">
-            Tiga langkah mudah untuk melaporkan sampah ilegal di sekitarmu
+            Empat langkah mudah untuk melaporkan dan mengatasi sampah ilegal
           </p>
 
-          <div className="grid sm:grid-cols-3 gap-8 stagger-children">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger-children">
             {[
               {
                 step: "01",
@@ -112,6 +112,13 @@ export default function Home() {
                 title: "Tandai di Peta",
                 desc: "Lokasi otomatis terdeteksi GPS dan ditampilkan di dashboard peta interaktif.",
                 color: "indigo",
+              },
+              {
+                step: "04",
+                icon: <IconTrashBin size={40} className="text-amber-400" />,
+                title: "Tindak Lanjut",
+                desc: "Petugas kebersihan sekitar akan datang ke lokasi untuk membersihkan tumpukan sampah.",
+                color: "amber",
               },
             ].map((item) => (
               <div
