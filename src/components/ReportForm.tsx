@@ -335,7 +335,7 @@ export default function ReportForm() {
             )}
 
             {/* Actions */}
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={handleReset}
                 className="flex-1 inline-flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold rounded-xl shadow-lg hover:scale-[1.01] active:scale-[0.99] transition-all"
@@ -346,17 +346,31 @@ export default function ReportForm() {
                 </svg>
                 Lapor Lagi
               </button>
-              <a
-                href="/dashboard"
-                className="flex-1 inline-flex items-center justify-center gap-2 py-3 bg-slate-700 text-white font-semibold rounded-xl text-center hover:bg-slate-600 transition-colors"
-              >
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
-                  <line x1="8" y1="2" x2="8" y2="18" />
-                  <line x1="16" y1="6" x2="16" y2="22" />
-                </svg>
-                Lihat Peta
-              </a>
+              
+              {email ? (
+                <a
+                  href="/profile"
+                  className="flex-1 inline-flex items-center justify-center gap-2 py-3 bg-slate-800 border border-slate-700 text-white font-semibold rounded-xl text-center hover:bg-slate-700 transition-colors"
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  Lihat Profil
+                </a>
+              ) : (
+                <a
+                  href="/dashboard"
+                  className="flex-1 inline-flex items-center justify-center gap-2 py-3 bg-slate-800 border border-slate-700 text-white font-semibold rounded-xl text-center hover:bg-slate-700 transition-colors"
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+                    <line x1="8" y1="2" x2="8" y2="18" />
+                    <line x1="16" y1="6" x2="16" y2="22" />
+                  </svg>
+                  Lihat Peta
+                </a>
+              )}
             </div>
           </div>
         )
