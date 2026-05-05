@@ -90,12 +90,12 @@ export default function Home() {
           {[...Array(2)].map((_, groupIdx) => (
             <div key={groupIdx} className="flex w-1/2 justify-around gap-4 px-2">
               {[
-                "https://images.unsplash.com/photo-1605600659908-0ef719419d41?auto=format&fit=crop&w=400&h=300&q=80",
-                "https://images.unsplash.com/photo-1526951521990-620dc14c214b?auto=format&fit=crop&w=400&h=300&q=80",
-                "https://images.unsplash.com/photo-1541427468627-a89a96e5ca1d?auto=format&fit=crop&w=400&h=300&q=80",
-                "https://images.unsplash.com/photo-1582408921715-18e7806365c1?auto=format&fit=crop&w=400&h=300&q=80",
-                "https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=400&h=300&q=80",
-                "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=400&h=300&q=80"
+                "/waste/1.png",
+                "/waste/2.png",
+                "/waste/3.png",
+                "/waste/4.png",
+                "/waste/5.png",
+                "/waste/6.png"
               ].map((src, idx) => (
                 <div key={`${groupIdx}-${idx}`} className="w-48 sm:w-64 shrink-0 aspect-[4/3] rounded-2xl overflow-hidden border border-slate-700/50 relative group/marquee cursor-pointer">
                   <img
