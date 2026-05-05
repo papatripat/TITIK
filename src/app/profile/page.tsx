@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
-import { IconWarning } from '@/lib/icons';
 
 type Report = {
   id: string;
@@ -52,20 +51,17 @@ export default function ProfilePage() {
     }
   }, [email, authLoading, router]);
 
-  // Fetch user reports
+  // Fetch user reports via API (server-side, bypasses RLS)
   useEffect(() => {
     if (!email) return;
 
     const fetchReports = async () => {
       try {
-        const { data, error } = await supabase
-          .from('reports')
-          .select('*')
-          .eq('user_email', email)
-          .order('created_at', { ascending: false });
+        const res = await fetch(`/api/reports/user?email=${encodeURIComponent(email)}`);
+        const data = await res.json();
 
-        if (error) throw error;
-        setReports(data || []);
+        if (!res.ok) throw new Error(data.error);
+        setReports(data.reports || []);
       } catch (err) {
         console.error('Failed to fetch user reports:', err);
       } finally {
