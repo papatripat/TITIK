@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { image, latitude, longitude } = body;
+    const { image, latitude, longitude, location_detail, description } = body;
 
     if (!image || !latitude || !longitude) {
       return NextResponse.json(
@@ -53,6 +53,8 @@ export async function POST(request: NextRequest) {
         image_url: imageUrl,
         latitude,
         longitude,
+        location_detail: location_detail || null,
+        description: description || null,
         severity: classification.severity,
         waste_type: classification.waste_type,
         confidence: classification.confidence,

@@ -24,6 +24,8 @@ export type Report = {
   image_url: string;
   latitude: number;
   longitude: number;
+  location_detail?: string;
+  description?: string;
   severity: 1 | 2 | 3;
   waste_type: 'plastic' | 'organic' | 'mixed';
   confidence: number;

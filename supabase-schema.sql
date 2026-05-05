@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS reports (
     image_url TEXT NOT NULL,
     latitude DOUBLE PRECISION NOT NULL,
     longitude DOUBLE PRECISION NOT NULL,
+    location_detail TEXT,
+    description TEXT,
     severity INTEGER NOT NULL CHECK (severity IN (1, 2, 3)),
     waste_type TEXT NOT NULL CHECK (waste_type IN ('plastic', 'organic', 'mixed')),
     confidence INTEGER NOT NULL DEFAULT 50 CHECK (confidence >= 0 AND confidence <= 100),

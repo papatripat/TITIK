@@ -227,11 +227,10 @@ export default function MapDashboard() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowChoropleth(!showChoropleth)}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-              showChoropleth
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${showChoropleth
                 ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
                 : 'bg-slate-800/50 text-slate-400 border border-slate-700/50 hover:text-white'
-            }`}
+              }`}
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
               <polygon points="12 2 2 7 12 12 22 7 12 2" />
@@ -288,6 +287,22 @@ export default function MapDashboard() {
                       {wasteTypeLabels[report.waste_type] || report.waste_type}
                     </span>
                   </div>
+                  {(report.location_detail || report.description) && (
+                    <div style={{ marginBottom: '8px', padding: '6px', backgroundColor: '#f1f5f9', borderRadius: '6px' }}>
+                      {report.location_detail && (
+                        <div style={{ marginBottom: report.description ? '4px' : '0' }}>
+                          <strong style={{ color: '#334155', display: 'block' }}>Lokasi Detail:</strong>
+                          <span style={{ color: '#475569' }}>{report.location_detail}</span>
+                        </div>
+                      )}
+                      {report.description && (
+                        <div>
+                          <strong style={{ color: '#334155', display: 'block' }}>Kronologi:</strong>
+                          <span style={{ color: '#475569', fontStyle: 'italic' }}>"{report.description}"</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
                   <div style={{ color: '#64748b', fontSize: '11px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '2px' }}>
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>

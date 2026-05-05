@@ -13,6 +13,8 @@ export default function ReportForm() {
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [location, setLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [locationStatus, setLocationStatus] = useState<string>('Mendeteksi lokasi...');
+  const [locationDetail, setLocationDetail] = useState('');
+  const [description, setDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [result, setResult] = useState<ClassificationResult | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -68,6 +70,8 @@ export default function ReportForm() {
           image: capturedImage,
           latitude: location.lat,
           longitude: location.lng,
+          location_detail: locationDetail,
+          description: description,
         }),
       });
 
@@ -90,6 +94,8 @@ export default function ReportForm() {
 
   const handleReset = () => {
     setCapturedImage(null);
+    setLocationDetail('');
+    setDescription('');
     setResult(null);
     setError(null);
     setStep('capture');
@@ -198,6 +204,38 @@ export default function ReportForm() {
                   {location.lat.toFixed(6)}, {location.lng.toFixed(6)}
                 </p>
               )}
+            </div>
+          </div>
+
+          {/* Additional Details */}
+          <div className="space-y-3">
+            <div>
+              <label htmlFor="locationDetail" className="block text-sm font-medium text-slate-300 mb-1">
+                Detail Lokasi <span className="text-slate-500 font-normal">(Opsional)</span>
+              </label>
+              <input
+                type="text"
+                id="locationDetail"
+                value={locationDetail}
+                onChange={(e) => setLocationDetail(e.target.value)}
+                placeholder="Cth: Depan Indomaret, dekat tiang listrik"
+                className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm placeholder-slate-500 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all"
+                disabled={isSubmitting}
+              />
+            </div>
+            <div>
+              <label htmlFor="description" className="block text-sm font-medium text-slate-300 mb-1">
+                Kronologi / Keterangan <span className="text-slate-500 font-normal">(Opsional)</span>
+              </label>
+              <textarea
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Cth: Sudah seminggu tidak diangkut, bau menyengat"
+                rows={3}
+                className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm placeholder-slate-500 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all resize-none"
+                disabled={isSubmitting}
+              />
             </div>
           </div>
 

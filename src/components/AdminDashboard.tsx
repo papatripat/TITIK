@@ -342,11 +342,27 @@ export default function AdminDashboard() {
                       <IconTrash size={16} />
                     </button>
                   </div>
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500 mb-2">
                     <span className="flex items-center gap-1"><IconLocationPin size={12} />{report.latitude.toFixed(5)}, {report.longitude.toFixed(5)}</span>
                     <span className="flex items-center gap-1"><IconCalendar size={12} />{formatDate(report.created_at)}</span>
                     <span className="font-mono text-slate-600 text-[10px]">ID: {report.id.slice(0, 8)}...</span>
                   </div>
+                  {(report.location_detail || report.description) && (
+                    <div className="bg-slate-800/80 rounded-lg p-3 text-sm border border-slate-700/50">
+                      {report.location_detail && (
+                        <div className="mb-2">
+                          <strong className="text-slate-300 block text-xs uppercase tracking-wider mb-0.5">Detail Lokasi</strong>
+                          <p className="text-slate-400">{report.location_detail}</p>
+                        </div>
+                      )}
+                      {report.description && (
+                        <div>
+                          <strong className="text-slate-300 block text-xs uppercase tracking-wider mb-0.5">Kronologi</strong>
+                          <p className="text-slate-400 italic">"{report.description}"</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
