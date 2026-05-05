@@ -185,8 +185,8 @@ export default function ReportForm() {
 
           {/* Location Status */}
           <div className={`flex items-center gap-3 p-3 rounded-xl border ${location
-              ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
-              : 'bg-slate-800 border-slate-700 text-slate-400'
+            ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
+            : 'bg-slate-800 border-slate-700 text-slate-400'
             }`}>
             {location ? (
               <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">

@@ -80,6 +80,37 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Marquee Garbage Images Section */}
+      <section className="py-12 border-y border-slate-800/50 bg-slate-900/30 overflow-hidden relative">
+        {/* Gradient Masks */}
+        <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#0b1120] to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#0b1120] to-transparent z-10 pointer-events-none" />
+        
+        <div className="flex w-[200%] animate-marquee hover:[animation-play-state:paused]">
+          {[...Array(2)].map((_, groupIdx) => (
+            <div key={groupIdx} className="flex w-1/2 justify-around gap-4 px-2">
+              {[
+                "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=400&h=300&q=80",
+                "https://images.unsplash.com/photo-1604187351574-c75ca79f5807?auto=format&fit=crop&w=400&h=300&q=80",
+                "https://images.unsplash.com/photo-1618477461853-cf6ed80fbea5?auto=format&fit=crop&w=400&h=300&q=80",
+                "https://images.unsplash.com/photo-1528323273322-d81458248d40?auto=format&fit=crop&w=400&h=300&q=80",
+                "https://images.unsplash.com/photo-1536882240095-0379873feb4e?auto=format&fit=crop&w=400&h=300&q=80",
+                "https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?auto=format&fit=crop&w=400&h=300&q=80"
+              ].map((src, idx) => (
+                <div key={`${groupIdx}-${idx}`} className="w-48 sm:w-64 shrink-0 aspect-[4/3] rounded-2xl overflow-hidden border border-slate-700/50 relative group/marquee cursor-pointer">
+                  <img 
+                    src={src} 
+                    alt="Illegal Waste Dump" 
+                    className="w-full h-full object-cover grayscale opacity-70 group-hover/marquee:grayscale-0 group-hover/marquee:opacity-100 group-hover/marquee:scale-110 transition-all duration-500" 
+                  />
+                  <div className="absolute inset-0 bg-emerald-500/20 opacity-0 group-hover/marquee:opacity-100 transition-opacity duration-300 mix-blend-overlay" />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* How It Works */}
       <section id="how-it-works" className="py-20 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
