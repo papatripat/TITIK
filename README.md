@@ -148,27 +148,56 @@ AI Gemini akan memberikan nilai 1 sampai 3 berdasarkan keparahan tumpukan sampah
 
 ---
 
-## 📦 Struktur Direktori Utama
+## 📦 Struktur Project 
 
 ```
 titik/
 ├── src/
-│   ├── app/              # Halaman Next.js (App Router)
-│   │   ├── admin/        # Dashboard Admin
-│   │   ├── api/          # Route API (Auth, Reports, AI)
-│   │   ├── dashboard/    # Halaman Peta Publik
-│   │   ├── login/        # Halaman Login
-│   │   ├── report/       # Halaman Form Pelaporan
-│   │   └── page.tsx      # Landing Page
-│   ├── components/       # Komponen UI (React)
-│   │   ├── CameraCapture.tsx # Pengelola Kamera HP
-│   │   ├── MapDashboard.tsx  # Peta Leaflet
-│   │   ├── AdminDashboard.tsx# Tabel Admin
-│   │   └── ...
-│   └── lib/              # Konfigurasi Supabase, Auth Context, & Gemini
-├── supabase-schema.sql   # Kode SQL Database
-├── .env.example          # Contoh variabel environment
-└── README.md             # Dokumentasi ini
+│   ├── app/                          # Next.js App Router
+│   │   ├── layout.tsx                # Root layout (Geist font, Navbar, Providers)
+│   │   ├── page.tsx                  # Home / landing page
+│   │   ├── globals.css               # Global styles + custom animations
+│   │   ├── report/page.tsx           # Halaman pelaporan sampah
+│   │   ├── dashboard/page.tsx        # Halaman peta dashboard
+│   │   ├── signin/page.tsx           # Halaman login utama (Supabase Auth + Admin)
+│   │   ├── signup/page.tsx           # Halaman registrasi akun baru (Supabase Auth)
+│   │   ├── forgot-password/page.tsx  # Halaman lupa password (kirim email reset)
+│   │   ├── reset-password/page.tsx   # Halaman reset password (buat password baru)
+│   │   ├── profile/page.tsx          # Halaman profil user + riwayat laporan
+│   │   ├── login/page.tsx            # [Legacy] Halaman login lama
+│   │   ├── admin/page.tsx            # Halaman admin panel
+│   │   └── api/
+│   │       ├── reports/
+│   │       │   ├── route.ts          # GET (list) + POST (create report + AI classify)
+│   │       │   ├── [id]/route.ts     # DELETE report by ID
+│   │       │   └── user/route.ts     # GET laporan berdasarkan user_email
+│   │       ├── auth/login/route.ts   # POST admin login (hardcoded creds, admin-only)
+│   │       └── admin/auth/route.ts   # POST admin auth (env-based password)
+│   ├── components/
+│   │   ├── AdminDashboard.tsx        # Panel admin: tabel data, hapus laporan
+│   │   ├── CameraCapture.tsx         # Komponen kamera (getUserMedia API)
+│   │   ├── LoadingScreen.tsx         # Global loading screen (animasi truk + progress bar)
+│   │   ├── MapDashboard.tsx          # Peta Leaflet + marker + choropleth
+│   │   ├── MapWrapper.tsx            # Dynamic import wrapper (SSR-safe)
+│   │   ├── Navbar.tsx                # Navigation bar (responsive, role-aware, profile link)
+│   │   ├── Providers.tsx             # Client provider (AuthProvider + LoadingScreen)
+│   │   └── ReportForm.tsx            # Form lengkap: kamera → GPS → submit → hasil AI
+│   └── lib/
+│       ├── auth-context.tsx          # React context + Supabase Auth sync (guest/user/admin)
+│       ├── gemini.ts                 # Gemini AI client + classifyWaste()
+│       ├── geo-helpers.ts            # Point-in-polygon, choropleth color utils
+│       ├── icons.tsx                 # Custom SVG icon components
+│       └── supabase.ts              # Supabase client + Report type
+├── public/
+│   ├── logo.png                      # Logo TITIK
+│   └── data/
+│       └── jatim-kabkota.geojson     # GeoJSON wilayah Jawa Timur (choropleth)
+├── supabase-schema.sql               # Database schema + RLS policies
+├── .env.example                      # Template environment variables
+├── next.config.ts                    # Next.js config (minimal)
+├── tsconfig.json                     # TypeScript config (path alias @/* → ./src/*)
+├── postcss.config.mjs                # PostCSS config (Tailwind v4)
+└── package.json
 ```
 
 ---
