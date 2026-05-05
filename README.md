@@ -129,8 +129,7 @@ npx localtunnel --port 3000
 ### 👮‍♂️ Sisi Admin (Pengelola)
 Aplikasi ini memiliki Dashboard Admin untuk mengelola data (seperti menghapus data sampah yang sudah dibersihkan).
 1. Buka menu **Login** atau akses `/login`.
-2. Gunakan salah satu kredensial berikut untuk masuk:
-   - **Admin 1:** `sipalingnanda@gmail.com` | Password: `dickyganteng77`
+2. Gunakan kredensial berikut untuk masuk:
    - **Admin 2:** `admintitik@gmail.com` | Password: `akuadmin123`
 3. Setelah masuk, Anda akan diarahkan ke **Admin Panel**.
 4. Di sini Anda bisa melihat daftar laporan dalam bentuk tabel dan menghapusnya jika perlu. Penghapusan ini akan otomatis menghilangkan marker dari Peta Publik.
