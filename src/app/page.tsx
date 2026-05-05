@@ -90,11 +90,11 @@ export default function Home() {
           {[...Array(2)].map((_, groupIdx) => (
             <div key={groupIdx} className="flex w-1/2 justify-around gap-4 px-2">
               {[
-                "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=400&h=300&q=80",
-                "https://images.unsplash.com/photo-1604187351574-c75ca79f5807?auto=format&fit=crop&w=400&h=300&q=80",
-                "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&w=400&h=300&q=80",
+                "https://images.unsplash.com/photo-1582408921715-18e7806365c1?auto=format&fit=crop&w=400&h=300&q=80",
                 "https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=400&h=300&q=80",
-                "https://images.unsplash.com/photo-1536882240095-0379873feb4e?auto=format&fit=crop&w=400&h=300&q=80",
+                "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=400&h=300&q=80",
+                "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=400&h=300&q=80",
+                "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&w=400&h=300&q=80",
                 "https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?auto=format&fit=crop&w=400&h=300&q=80"
               ].map((src, idx) => (
                 <div key={`${groupIdx}-${idx}`} className="w-48 sm:w-64 shrink-0 aspect-[4/3] rounded-2xl overflow-hidden border border-slate-700/50 relative group/marquee cursor-pointer">
