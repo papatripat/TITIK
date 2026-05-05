@@ -93,7 +93,7 @@ export default function Home() {
                 "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=400&h=300&q=80",
                 "https://images.unsplash.com/photo-1604187351574-c75ca79f5807?auto=format&fit=crop&w=400&h=300&q=80",
                 "https://images.unsplash.com/photo-1618477461853-cf6ed80fbea5?auto=format&fit=crop&w=400&h=300&q=80",
-                "https://images.unsplash.com/photo-1528323273322-d81458248d40?auto=format&fit=crop&w=400&h=300&q=80",
+                "https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=400&h=300&q=80",
                 "https://images.unsplash.com/photo-1536882240095-0379873feb4e?auto=format&fit=crop&w=400&h=300&q=80",
                 "https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?auto=format&fit=crop&w=400&h=300&q=80"
               ].map((src, idx) => (
