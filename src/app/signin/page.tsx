@@ -145,6 +145,14 @@ export default function SignInPage() {
           >
             Daftar akun baru
           </Link>
+
+          {/* Continue as guest */}
+          <a
+            href="/"
+            className="block w-full py-3 mt-3 text-center text-slate-500 text-sm hover:text-slate-300 transition-all"
+          >
+            Lanjutkan tanpa login
+          </a>
         </div>
       </div>
     </div>
