@@ -99,9 +99,20 @@ export default function Navbar() {
                         Admin
                       </Link>
                     )}
-                    <span className="text-xs text-slate-500 px-2 hidden lg:inline truncate max-w-[140px]">
-                      {email}
-                    </span>
+                    <Link
+                      href="/profile"
+                      className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                        pathname === '/profile'
+                          ? 'bg-slate-800 text-white shadow-inner'
+                          : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                      }`}
+                    >
+                      <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                      <span className="truncate max-w-[120px] hidden lg:inline">{email}</span>
+                    </Link>
                     <button
                       onClick={handleLogout}
                       className="p-2 rounded-lg text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-all"
@@ -197,12 +208,27 @@ export default function Navbar() {
                         Admin Dashboard
                       </Link>
                     )}
+                    <Link
+                      href="/profile"
+                      onClick={() => setIsOpen(false)}
+                      className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium ${
+                        pathname === '/profile'
+                          ? 'bg-slate-800 text-white'
+                          : 'text-slate-400 hover:bg-slate-800/50'
+                      }`}
+                    >
+                      <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                      Profil Saya <span className="text-xs text-slate-500 truncate max-w-[150px]">({email})</span>
+                    </Link>
                     <button
                       onClick={handleLogout}
                       className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:bg-red-500/10 w-full text-left"
                     >
                       <IconLogout size={16} />
-                      Keluar ({email})
+                      Keluar
                     </button>
                   </>
                 )}

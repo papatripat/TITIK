@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import CameraCapture from './CameraCapture';
+import { useAuth } from '@/lib/auth-context';
 
 type ClassificationResult = {
   severity: 1 | 2 | 3;
@@ -10,6 +11,7 @@ type ClassificationResult = {
 };
 
 export default function ReportForm() {
+  const { email } = useAuth();
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [location, setLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [locationStatus, setLocationStatus] = useState<string>('Mendeteksi lokasi...');
@@ -72,6 +74,7 @@ export default function ReportForm() {
           longitude: location.lng,
           location_detail: locationDetail,
           description: description,
+          user_email: email,
         }),
       });
 
