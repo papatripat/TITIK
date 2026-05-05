@@ -90,12 +90,12 @@ export default function Home() {
           {[...Array(2)].map((_, groupIdx) => (
             <div key={groupIdx} className="flex w-1/2 justify-around gap-4 px-2">
               {[
-                "https://images.unsplash.com/photo-1582408921715-18e7806365c1?auto=format&fit=crop&w=400&h=300&q=80",
-                "https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=400&h=300&q=80",
-                "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=400&h=300&q=80",
-                "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=400&h=300&q=80",
-                "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&w=400&h=300&q=80",
-                "https://images.unsplash.com/photo-1595278069441-2cf29f8005a4?auto=format&fit=crop&w=400&h=300&q=80"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Citarum_River_2.jpg/800px-Citarum_River_2.jpg",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Ciliwung_River_with_trash.jpg/800px-Ciliwung_River_with_trash.jpg",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Trash_in_the_river_in_Jakarta.jpg/800px-Trash_in_the_river_in_Jakarta.jpg",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Trash_in_Ciliwung_River.jpg/800px-Trash_in_Ciliwung_River.jpg",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Garbage_in_Bali_Beach.jpg/800px-Garbage_in_Bali_Beach.jpg",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Plastic_waste_at_Jimbaran_Bay.jpg/800px-Plastic_waste_at_Jimbaran_Bay.jpg"
               ].map((src, idx) => (
                 <div key={`${groupIdx}-${idx}`} className="w-48 sm:w-64 shrink-0 aspect-[4/3] rounded-2xl overflow-hidden border border-slate-700/50 relative group/marquee cursor-pointer">
                   <img
