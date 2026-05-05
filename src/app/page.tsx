@@ -5,64 +5,83 @@ export default function Home() {
   return (
     <div className="min-h-[calc(100vh-4rem)]">
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-24">
         {/* Background decorations */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-0 left-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-32">
-          <div className="text-center stagger-children">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-8">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              Hackathon Project 2026
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col items-center text-center stagger-children">
+            
+            {/* Logo Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700/50 text-slate-300 text-sm font-medium mb-10">
+              <img src="/logo.png" alt="TITIK Logo" className="w-5 h-5 object-contain" />
+              <span className="tracking-wide uppercase text-xs font-bold text-emerald-400">Project TITIK</span>
             </div>
 
-            {/* Logo and Title */}
-            <div className="flex flex-col items-center justify-center mb-6">
-              <img src="/logo.png" alt="TITIK Logo" className="w-32 h-32 md:w-40 md:h-40 object-contain mb-8 animate-float" />
-              <h1 className="text-5xl sm:text-7xl font-bold tracking-tight">
-                <span className="gradient-text">TITIK</span>
-                <br />
-                <span className="text-white text-3xl sm:text-5xl">
-                  Temukan. Identifikasi. Tandai. Informasikan. Kirimkan.
-                </span>
-              </h1>
-            </div>
+            {/* Giant Typography Header */}
+            <h1 className="text-[3rem] sm:text-[5rem] md:text-[6.5rem] font-black tracking-tighter leading-[1.05] text-white mb-10">
+              Your Small
+              <span className="inline-block align-middle mx-3 sm:mx-6 w-28 h-12 sm:w-48 sm:h-24 rounded-full overflow-hidden border-[3px] sm:border-[4px] border-slate-800/80 shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:scale-105 transition-transform duration-500">
+                <img 
+                  src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80" 
+                  alt="Beautiful Nature" 
+                  className="w-full h-full object-cover scale-110"
+                />
+              </span>
+              Actions<br/>
+              Can Keep <span className="text-emerald-400">Indonesia</span><br/>
+              Clean & Green
+            </h1>
 
             {/* Subtitle */}
-            <p className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-400 mb-12 leading-relaxed">
-              Sistem pemetaan &amp; pelaporan sampah ilegal berbasis AI.
-              <br className="hidden sm:block" />
-              Ambil foto, biarkan AI menganalisis, dan tandai di peta.
+            <p className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-400 mb-12 font-medium">
+              Dispose of your waste properly and help us protect the environment. 
+              Snap a photo, let AI identify it, and map it for a better future.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row items-center gap-6 justify-center mb-20">
               <Link
                 href="/report"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold text-lg rounded-2xl shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all animate-pulse-glow"
+                className="inline-flex items-center justify-center px-10 py-5 bg-emerald-500 text-slate-950 font-black text-lg rounded-full shadow-[0_0_40px_rgba(16,185,129,0.4)] hover:shadow-[0_0_60px_rgba(16,185,129,0.6)] hover:bg-emerald-400 hover:scale-105 active:scale-95 transition-all duration-300 uppercase tracking-wide"
               >
-                <IconCamera size={22} className="text-white" />
-                Laporkan Sampah
+                Start Reporting
               </Link>
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-800/80 border border-slate-700 text-white font-bold text-lg rounded-2xl hover:bg-slate-700/80 hover:border-slate-600 transition-all"
+              <a
+                href="#how-it-works"
+                className="inline-flex items-center justify-center gap-2 px-8 py-5 text-white font-bold text-lg hover:text-emerald-400 transition-colors uppercase tracking-wide group"
               >
-                <IconMap size={22} className="text-white" />
-                Lihat Dashboard
-              </Link>
+                See How It Works
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+              </a>
             </div>
+
+            {/* Checklist Features */}
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-10 border-t border-slate-800/80 w-full max-w-5xl">
+              {[
+                "Protect Nature",
+                "Dispose Properly",
+                "AI-Powered Tracking",
+                "Save The Earth"
+              ].map((text, i) => (
+                <div key={i} className="flex items-center gap-2 text-sm sm:text-base font-medium text-slate-300">
+                  <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                    <svg className="w-3 h-3 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                  </div>
+                  {text}
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* How It Works */}
-      <section className="py-20 px-4 sm:px-6">
+      <section id="how-it-works" className="py-20 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-4">
             Cara Kerja
