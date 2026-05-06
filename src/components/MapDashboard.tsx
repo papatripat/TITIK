@@ -86,10 +86,13 @@ function ChoroplethLayer({
       const label = getZoneLabel(count);
       const labelColor = getZoneLabelColor(count);
 
+      const rawName = feature.properties.name || '';
+      const displayName = rawName.replace(/^(Kab\.|Kabupaten)\s+(Kota\s+.*)/i, '$2');
+
       (layer as L.Path).bindPopup(`
         <div style="font-family:system-ui;font-size:13px;min-width:160px;">
           <div style="font-weight:700;font-size:15px;margin-bottom:6px;color:#1e293b;">
-            ${feature.properties.name}
+            ${displayName}
           </div>
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
             <span style="width:10px;height:10px;border-radius:50%;background:${labelColor};display:inline-block;"></span>
