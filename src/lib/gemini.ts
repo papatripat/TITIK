@@ -19,7 +19,12 @@ export async function classifyWaste(
   mimeType: string = 'image/jpeg'
 ): Promise<WasteClassification> {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+    const model = genAI.getGenerativeModel({ 
+      model: 'gemini-2.0-flash',
+      generationConfig: {
+        responseMimeType: "application/json"
+      }
+    });
 
     const prompt = `You are an expert environmental inspector AI. Analyze this image of illegal waste/garbage dumping.
 
