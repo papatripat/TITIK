@@ -21,17 +21,17 @@ export async function classifyWaste(
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
-    const prompt = `You are a waste classification AI. Analyze this image of waste/garbage.
+    const prompt = `You are an expert environmental inspector AI. Analyze this image of illegal waste/garbage dumping.
 
 Classify the waste and return ONLY a valid JSON object with these exact fields:
-- "severity": 1, 2, or 3 (1 = small/minimal waste, 2 = moderate pile, 3 = large/critical pile)
-- "waste_type": "plastic", "organic", or "mixed"
-- "confidence": a number from 0 to 100 indicating your confidence
+- "severity": Must be exactly 1, 2, or 3. 
+    * 1 = Small/minimal waste (scattered trash, single items, minor litter).
+    * 2 = Moderate pile (a few trash bags, small localized dump).
+    * 3 = Large/critical pile (massive amount of garbage, mountain of trash, extensive illegal dumping).
+- "waste_type": "plastic", "organic", or "mixed".
+- "confidence": a number from 0 to 100 indicating your confidence.
 
-Return ONLY the JSON object, no markdown, no explanation, no extra text.
-
-Example response:
-{"severity": 2, "waste_type": "mixed", "confidence": 85}`;
+Return ONLY the JSON object, no markdown, no explanation, no extra text.`;
 
     const result = await model.generateContent([
       prompt,
