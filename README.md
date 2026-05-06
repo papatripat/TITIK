@@ -24,6 +24,7 @@
 - 📍 **Deteksi Lokasi Akurat** — Mengambil koordinat GPS secara real-time via browser.
 - 🗺️ **Dashboard Peta Interaktif** — Dibangun dengan Leaflet.js, menampilkan marker laporan dengan warna (Hijau/Kuning/Merah) berdasarkan keparahan.
 - 🔄 **Sinkronisasi Real-time** — Peta dan daftar laporan otomatis diperbarui.
+- 👤 **Sistem Akun & Profil** — Pengguna publik dapat mendaftar dan login untuk menyimpan riwayat pelaporan pribadi mereka.
 - 🛡️ **Panel Admin** — Halaman khusus pengelola untuk melihat dan menghapus laporan yang sudah tidak sesuai.
 
 ---
@@ -119,19 +120,20 @@ npx localtunnel --port 3000
 
 ### 👨‍💻 Sisi Pengguna (Pelapor)
 1. Buka aplikasi di HP (atau browser laptop/PC).
-2. Pilih menu **Lapor** di navigasi bawah atau melalui tombol utama.
-3. Klik area **"Buka Kamera"**. (Izinkan akses Kamera & Lokasi jika diminta oleh browser).
-4. Arahkan kamera ke tumpukan sampah dan ambil foto.
-5. Koordinat Anda akan otomatis diambil. Pastikan akurasinya memadai.
-6. Klik **"Kirim Laporan"**.
-7. AI Gemini akan segera menganalisis tingkat keparahan, memberikan skor, dan menebak jenis sampah. Setelah selesai, laporan langsung muncul di Peta!
+2. *(Opsional)* Buat akun dan login via halaman `/signin` agar riwayat laporan Anda tersimpan di Profil Pribadi. Anda tetap bisa melapor tanpa login (sebagai *Guest*).
+3. Pilih menu **Lapor** di navigasi bawah atau melalui tombol utama.
+4. Klik area **"Buka Kamera"**. (Izinkan akses Kamera & Lokasi jika diminta oleh browser).
+5. Arahkan kamera ke tumpukan sampah dan ambil foto.
+6. Koordinat Anda akan otomatis diambil. Pastikan akurasinya memadai.
+7. Klik **"Kirim Laporan"**.
+8. AI Gemini akan segera menganalisis tingkat keparahan, memberikan skor, dan menebak jenis sampah. Setelah selesai, laporan langsung muncul di Peta!
 
 ### 👮‍♂️ Sisi Admin (Pengelola)
 Aplikasi ini memiliki Dashboard Admin untuk mengelola data (seperti menghapus data sampah yang sudah dibersihkan).
-1. Buka menu **Login** atau akses `/login`.
-2. Gunakan kredensial berikut untuk masuk:
+1. Buka halaman akses terpadu di `/signin`.
+2. Gunakan kredensial khusus admin berikut untuk masuk:
    - **Admin:** `admintitik@gmail.com` | Password: `akuadmin123`
-3. Setelah masuk, Anda akan diarahkan ke **Admin Panel**.
+3. Sistem akan mendeteksi kredensial admin dan langsung mengarahkan Anda ke **Admin Panel**.
 4. Di sini Anda bisa melihat daftar laporan dalam bentuk tabel dan menghapusnya jika perlu. Penghapusan ini akan otomatis menghilangkan marker dari Peta Publik.
 
 ---
