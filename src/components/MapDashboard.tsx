@@ -150,7 +150,31 @@ export default function MapDashboard() {
       const response = await fetch(`/api/reports?_t=${Date.now()}`, { cache: 'no-store' });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Failed to fetch');
-      setReports(data.reports || []);
+      const rawReports = data.reports || [];
+      
+      // Process data to add jitter (offset) to overlapping reports
+      const processedReports = rawReports.map((report: Report, _: any, array: Report[]) => {
+        const identical = array.filter(
+          r => r.latitude === report.latitude && r.longitude === report.longitude
+        );
+        
+        if (identical.length > 1) {
+          const identicalIndex = identical.findIndex(r => r.id === report.id);
+          // If it's the first one, keep it in the center. Offset the rest in a circle.
+          if (identicalIndex > 0) {
+            const angle = (identicalIndex / (identical.length - 1)) * Math.PI * 2;
+            const radius = 0.00015; // approx 15 meters
+            return {
+              ...report,
+              latitude: report.latitude + Math.cos(angle) * radius,
+              longitude: report.longitude + Math.sin(angle) * radius
+            };
+          }
+        }
+        return report;
+      });
+
+      setReports(processedReports);
       setLastUpdated(new Date());
       setError(null);
     } catch (err) {
