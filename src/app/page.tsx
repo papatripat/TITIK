@@ -86,9 +86,9 @@ export default function Home() {
         <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#0b1120] to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#0b1120] to-transparent z-10 pointer-events-none" />
 
-        <div className="flex w-[200%] animate-marquee hover:[animation-play-state:paused]">
+        <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
           {[...Array(2)].map((_, groupIdx) => (
-            <div key={groupIdx} className="flex w-1/2 justify-around gap-4 px-2">
+            <div key={groupIdx} className="flex shrink-0 justify-around gap-4 px-2">
               {[
                 "/waste/1.png",
                 "/waste/2.png",
