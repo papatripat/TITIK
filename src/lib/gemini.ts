@@ -56,12 +56,16 @@ Return ONLY the JSON object, no markdown, no explanation, no extra text.`;
     const cleanText = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
     const parsed = JSON.parse(cleanText);
 
-    // Validate the response
-    const severity = [1, 2, 3].includes(parsed.severity) ? parsed.severity : 2;
+    // Validate the response (handle potential string outputs from LLM)
+    const parsedSeverity = Number(parsed.severity);
+    const severity = [1, 2, 3].includes(parsedSeverity) ? (parsedSeverity as 1 | 2 | 3) : 2;
+    
     const wasteTypes = ['plastic', 'organic', 'mixed'];
     const waste_type = wasteTypes.includes(parsed.waste_type) ? parsed.waste_type : 'mixed';
-    const confidence = typeof parsed.confidence === 'number'
-      ? Math.min(100, Math.max(0, Math.round(parsed.confidence)))
+    
+    const parsedConfidence = Number(parsed.confidence);
+    const confidence = !isNaN(parsedConfidence)
+      ? Math.min(100, Math.max(0, Math.round(parsedConfidence)))
       : 50;
 
     return { severity, waste_type, confidence };
