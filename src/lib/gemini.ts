@@ -1,11 +1,17 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
 export type WasteClassification = {
   severity: 1 | 2 | 3;
   waste_type: 'plastic' | 'organic' | 'mixed';
   confidence: number;
+  _debug?: {
+    rawText?: string;
+    error?: string;
+    usedFallback: boolean;
+    apiKeyPresent: boolean;
+  };
 };
 
 const FALLBACK_CLASSIFICATION: WasteClassification = {
@@ -18,12 +24,26 @@ export async function classifyWaste(
   imageBase64: string,
   mimeType: string = 'image/jpeg'
 ): Promise<WasteClassification> {
+  const apiKeyPresent = !!process.env.GEMINI_API_KEY;
+
+  if (!apiKeyPresent) {
+    console.error('GEMINI_API_KEY is not set!');
+    return {
+      ...FALLBACK_CLASSIFICATION,
+      _debug: {
+        error: 'GEMINI_API_KEY environment variable is not set',
+        usedFallback: true,
+        apiKeyPresent: false,
+      },
+    };
+  }
+
   try {
     const model = genAI.getGenerativeModel({ 
       model: 'gemini-2.0-flash',
       generationConfig: {
-        responseMimeType: "application/json"
-      }
+        responseMimeType: 'application/json',
+      },
     });
 
     const prompt = `You are an expert environmental inspector AI. Analyze this image of illegal waste/garbage dumping.
@@ -51,6 +71,8 @@ Return ONLY the JSON object, no markdown, no explanation, no extra text.`;
     const response = result.response;
     const text = response.text().trim();
 
+    console.log('Gemini raw response:', text);
+
     // Try to parse the JSON response
     // Remove possible markdown code fences
     const cleanText = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
@@ -68,9 +90,26 @@ Return ONLY the JSON object, no markdown, no explanation, no extra text.`;
       ? Math.min(100, Math.max(0, Math.round(parsedConfidence)))
       : 50;
 
-    return { severity, waste_type, confidence };
+    return {
+      severity,
+      waste_type,
+      confidence,
+      _debug: {
+        rawText: text,
+        usedFallback: false,
+        apiKeyPresent: true,
+      },
+    };
   } catch (error) {
-    console.error('Gemini classification failed:', error);
-    return FALLBACK_CLASSIFICATION;
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error('Gemini classification failed:', errorMessage);
+    return {
+      ...FALLBACK_CLASSIFICATION,
+      _debug: {
+        error: errorMessage,
+        usedFallback: true,
+        apiKeyPresent,
+      },
+    };
   }
 }

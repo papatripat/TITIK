@@ -45,6 +45,8 @@ export async function POST(request: NextRequest) {
 
     // 3. Classify waste using Gemini AI
     const classification = await classifyWaste(base64Data);
+    
+    console.log('Classification result:', JSON.stringify(classification));
 
     // 4. Save report to database
     const { data: report, error: dbError } = await supabase
@@ -75,6 +77,7 @@ export async function POST(request: NextRequest) {
       success: true,
       report,
       classification,
+      _debug: classification._debug || null,
     });
   } catch (error) {
     console.error('API error:', error);
