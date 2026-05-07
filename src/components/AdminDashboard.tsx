@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 import type { Report } from '@/lib/supabase';
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, Legend, ResponsiveContainer } from 'recharts';
 import {
   IconLogout,
   IconTrash,
@@ -220,45 +221,113 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-            <IconChart size={28} className="text-emerald-400" />
-            Admin Dashboard
-          </h1>
-          <p className="text-slate-400 text-sm mt-1">
-            Login sebagai <span className="text-emerald-400 font-medium">{email}</span>
-          </p>
+      {/* Admin Profile Header */}
+      <div className="glass-card p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl" style={{ fontFamily: 'var(--font-geist-sans), system-ui, sans-serif' }}>
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-xl uppercase">
+            {email ? email.charAt(0) : 'A'}
+          </div>
+          <div>
+            <h1 className="text-xl font-bold text-white flex items-center gap-2">
+              Profil Admin
+            </h1>
+            <p className="text-slate-400 text-sm mt-0.5">
+              <span className="text-emerald-400 font-medium">{email}</span> <span className="mx-1">•</span> <span className="capitalize">{role}</span>
+            </p>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <button onClick={fetchReports} disabled={loading} className="p-2.5 bg-slate-800 border border-slate-700 rounded-xl text-slate-400 hover:text-white hover:border-slate-600 transition-all" title="Refresh data">
+        <div className="flex items-center gap-3">
+          <button onClick={fetchReports} disabled={loading} className="p-2.5 bg-slate-800/80 border border-slate-700/50 rounded-xl text-slate-400 hover:text-white hover:border-emerald-500/50 transition-all" title="Refresh data">
             <IconRefresh size={18} className={loading ? 'animate-spin' : ''} />
           </button>
-          <button onClick={handleLogout} className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-slate-400 hover:text-red-400 hover:border-red-500/30 transition-all text-sm font-medium">
+          <button onClick={handleLogout} className="inline-flex items-center gap-2 px-4 py-2.5 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 hover:bg-red-500/20 hover:border-red-500/40 transition-all text-sm font-medium">
             <IconLogout size={16} />
             Keluar
           </button>
         </div>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
-          <p className="text-3xl font-bold text-white">{stats.total}</p>
-          <p className="text-xs text-slate-400 mt-1">Total Laporan</p>
+      {/* Analytics Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{ fontFamily: 'var(--font-geist-sans), system-ui, sans-serif' }}>
+        {/* Chart 1: Severity */}
+        <div className="glass-card p-6 rounded-2xl">
+          <h3 className="text-lg font-semibold text-white mb-6">
+            Tingkat Keparahan Laporan
+          </h3>
+          <div className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={[
+                    { name: 'Ringan', value: stats.severity1, color: '#10b981' },
+                    { name: 'Sedang', value: stats.severity2, color: '#eab308' },
+                    { name: 'Berat', value: stats.severity3, color: '#ef4444' },
+                  ]}
+                  innerRadius={60}
+                  outerRadius={80}
+                  paddingAngle={5}
+                  dataKey="value"
+                  stroke="none"
+                >
+                  {[
+                    { name: 'Ringan', value: stats.severity1, color: '#10b981' },
+                    { name: 'Sedang', value: stats.severity2, color: '#eab308' },
+                    { name: 'Berat', value: stats.severity3, color: '#ef4444' },
+                  ].map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <RechartsTooltip 
+                  contentStyle={{ backgroundColor: '#0b1120', border: '1px solid rgba(51, 65, 85, 0.5)', borderRadius: '8px', color: '#fff' }}
+                  itemStyle={{ color: '#fff' }}
+                />
+                <Legend iconType="circle" wrapperStyle={{ fontSize: '14px', color: '#94a3b8' }} />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
         </div>
-        <div className="p-4 bg-emerald-500/10 rounded-xl border border-emerald-500/20">
-          <p className="text-3xl font-bold text-emerald-400">{stats.severity1}</p>
-          <p className="text-xs text-slate-400 mt-1">Ringan (Lvl 1)</p>
-        </div>
-        <div className="p-4 bg-amber-500/10 rounded-xl border border-amber-500/20">
-          <p className="text-3xl font-bold text-amber-400">{stats.severity2}</p>
-          <p className="text-xs text-slate-400 mt-1">Sedang (Lvl 2)</p>
-        </div>
-        <div className="p-4 bg-red-500/10 rounded-xl border border-red-500/20">
-          <p className="text-3xl font-bold text-red-400">{stats.severity3}</p>
-          <p className="text-xs text-slate-400 mt-1">Berat (Lvl 3)</p>
+
+        {/* Chart 2: Waste Type */}
+        <div className="glass-card p-6 rounded-2xl">
+          <h3 className="text-lg font-semibold text-white mb-6">
+            Sebaran Jenis Sampah
+          </h3>
+          <div className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart 
+                data={[
+                  { name: 'Plastik', value: reports.filter((r) => r.waste_type === 'plastic').length },
+                  { name: 'Organik', value: reports.filter((r) => r.waste_type === 'organic').length },
+                  { name: 'Campuran', value: reports.filter((r) => r.waste_type === 'mixed').length },
+                ]} 
+                margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
+              >
+                <XAxis 
+                  dataKey="name" 
+                  axisLine={false} 
+                  tickLine={false} 
+                  tick={{ fill: '#94a3b8', fontSize: 12 }} 
+                  dy={10}
+                />
+                <YAxis 
+                  axisLine={false} 
+                  tickLine={false} 
+                  tick={{ fill: '#94a3b8', fontSize: 12 }} 
+                  allowDecimals={false}
+                />
+                <RechartsTooltip 
+                  cursor={{ fill: 'rgba(255,255,255,0.05)' }}
+                  contentStyle={{ backgroundColor: '#0b1120', border: '1px solid rgba(51, 65, 85, 0.5)', borderRadius: '8px', color: '#fff' }}
+                />
+                <Bar 
+                  dataKey="value" 
+                  fill="#06b6d4" 
+                  radius={[4, 4, 0, 0]} 
+                  barSize={40}
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
       </div>
 

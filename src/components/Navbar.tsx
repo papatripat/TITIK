@@ -85,19 +85,15 @@ export default function Navbar() {
                 ) : (
                   <div className="flex items-center gap-1 ml-2 pl-2 border-l border-slate-700">
                     {role === 'admin' && (
-                      <Link
-                        href="/admin"
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                          pathname === '/admin'
-                            ? 'bg-amber-500/15 text-amber-400'
-                            : 'bg-amber-500/10 text-amber-400/80 hover:bg-amber-500/20 hover:text-amber-400'
-                        }`}
+                      <div
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500/15 text-amber-400 cursor-default"
+                        title="Status: Admin"
                       >
                         <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                         </svg>
                         Admin
-                      </Link>
+                      </div>
                     )}
                     <Link
                       href="/profile"
@@ -193,20 +189,12 @@ export default function Navbar() {
                 ) : (
                   <>
                     {role === 'admin' && (
-                      <Link
-                        href="/admin"
-                        onClick={() => setIsOpen(false)}
-                        className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium ${
-                          pathname === '/admin'
-                            ? 'bg-amber-500/15 text-amber-400'
-                            : 'text-amber-400/80 hover:bg-amber-500/10'
-                        }`}
-                      >
+                      <div className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium bg-amber-500/15 text-amber-400 cursor-default">
                         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
                           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                         </svg>
-                        Admin Dashboard
-                      </Link>
+                        Status: Admin
+                      </div>
                     )}
                     <Link
                       href="/profile"

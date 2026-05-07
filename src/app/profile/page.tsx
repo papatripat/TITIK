@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 import { supabase } from '@/lib/supabase';
+import AdminDashboard from '@/components/AdminDashboard';
 
 type Report = {
   id: string;
@@ -84,6 +85,17 @@ export default function ProfilePage() {
   }
 
   if (!email) return null; // Will redirect
+
+  // If user is admin, show the Admin Dashboard directly
+  if (role === 'admin') {
+    return (
+      <div className="min-h-screen pt-24 pb-12 px-4 animate-fade-in">
+        <div className="max-w-7xl mx-auto">
+          <AdminDashboard />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen pt-24 pb-12 px-4 animate-fade-in">
