@@ -9,7 +9,6 @@ import {
   IconLogout,
   IconTrash,
   IconEye,
-  IconChart,
   IconSearch,
   IconFilter,
   IconWarning,
@@ -185,11 +184,10 @@ export default function AdminDashboard() {
       {/* Notification */}
       {notification && (
         <div
-          className={`fixed top-20 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-2xl text-sm font-medium animate-slide-up ${
-            notification.type === 'success'
-              ? 'bg-emerald-500/90 text-white'
-              : 'bg-red-500/90 text-white'
-          }`}
+          className={`fixed top-20 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-xl shadow-2xl text-sm font-medium animate-slide-up ${notification.type === 'success'
+            ? 'bg-emerald-500/90 text-white'
+            : 'bg-red-500/90 text-white'
+            }`}
         >
           {notification.type === 'success' ? <IconCheckCircle size={18} /> : <IconWarning size={18} />}
           {notification.message}
@@ -200,6 +198,7 @@ export default function AdminDashboard() {
       {previewImage && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setPreviewImage(null)}>
           <div className="relative max-w-3xl max-h-[85vh] animate-fade-in">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={previewImage} alt="Preview laporan" className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl" />
             <button onClick={() => setPreviewImage(null)} className="absolute -top-3 -right-3 w-8 h-8 bg-slate-800 border border-slate-600 rounded-full flex items-center justify-center text-white hover:bg-slate-700 transition-colors">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
@@ -312,7 +311,7 @@ export default function AdminDashboard() {
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <RechartsTooltip 
+                <RechartsTooltip
                   contentStyle={{ backgroundColor: '#0b1120', border: '1px solid rgba(51, 65, 85, 0.5)', borderRadius: '8px', color: '#fff' }}
                   itemStyle={{ color: '#fff' }}
                 />
@@ -329,35 +328,35 @@ export default function AdminDashboard() {
           </h3>
           <div className="h-64 w-full min-w-0">
             <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
-              <BarChart 
+              <BarChart
                 data={[
                   { name: 'Plastik', value: reports.filter((r) => r.waste_type === 'plastic').length },
                   { name: 'Organik', value: reports.filter((r) => r.waste_type === 'organic').length },
                   { name: 'Campuran', value: reports.filter((r) => r.waste_type === 'mixed').length },
-                ]} 
+                ]}
                 margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
               >
-                <XAxis 
-                  dataKey="name" 
-                  axisLine={false} 
-                  tickLine={false} 
-                  tick={{ fill: '#94a3b8', fontSize: 12 }} 
+                <XAxis
+                  dataKey="name"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: '#94a3b8', fontSize: 12 }}
                   dy={10}
                 />
-                <YAxis 
-                  axisLine={false} 
-                  tickLine={false} 
-                  tick={{ fill: '#94a3b8', fontSize: 12 }} 
+                <YAxis
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: '#94a3b8', fontSize: 12 }}
                   allowDecimals={false}
                 />
-                <RechartsTooltip 
+                <RechartsTooltip
                   cursor={{ fill: 'rgba(255,255,255,0.05)' }}
                   contentStyle={{ backgroundColor: '#0b1120', border: '1px solid rgba(51, 65, 85, 0.5)', borderRadius: '8px', color: '#fff' }}
                 />
-                <Bar 
-                  dataKey="value" 
-                  fill="#06b6d4" 
-                  radius={[4, 4, 0, 0]} 
+                <Bar
+                  dataKey="value"
+                  fill="#06b6d4"
+                  radius={[4, 4, 0, 0]}
                   barSize={40}
                 />
               </BarChart>
@@ -372,31 +371,31 @@ export default function AdminDashboard() {
           </h3>
           <div className="h-64 w-full min-w-0">
             <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
-              <BarChart 
-                data={trendData} 
+              <BarChart
+                data={trendData}
                 margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
               >
-                <XAxis 
-                  dataKey="name" 
-                  axisLine={false} 
-                  tickLine={false} 
-                  tick={{ fill: '#94a3b8', fontSize: 12 }} 
+                <XAxis
+                  dataKey="name"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: '#94a3b8', fontSize: 12 }}
                   dy={10}
                 />
-                <YAxis 
-                  axisLine={false} 
-                  tickLine={false} 
-                  tick={{ fill: '#94a3b8', fontSize: 12 }} 
+                <YAxis
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fill: '#94a3b8', fontSize: 12 }}
                   allowDecimals={false}
                 />
-                <RechartsTooltip 
+                <RechartsTooltip
                   cursor={{ fill: 'rgba(255,255,255,0.05)' }}
                   contentStyle={{ backgroundColor: '#0b1120', border: '1px solid rgba(51, 65, 85, 0.5)', borderRadius: '8px', color: '#fff' }}
                 />
-                <Bar 
-                  dataKey="value" 
-                  fill="#8b5cf6" 
-                  radius={[4, 4, 0, 0]} 
+                <Bar
+                  dataKey="value"
+                  fill="#8b5cf6"
+                  radius={[4, 4, 0, 0]}
                   barSize={40}
                 />
               </BarChart>
@@ -423,7 +422,7 @@ export default function AdminDashboard() {
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <RechartsTooltip 
+                <RechartsTooltip
                   contentStyle={{ backgroundColor: '#0b1120', border: '1px solid rgba(51, 65, 85, 0.5)', borderRadius: '8px', color: '#fff' }}
                   itemStyle={{ color: '#fff' }}
                 />
@@ -491,6 +490,7 @@ export default function AdminDashboard() {
               <div className="flex gap-4">
                 {report.image_url && (
                   <button onClick={() => setPreviewImage(report.image_url)} className="shrink-0 w-20 h-20 rounded-lg overflow-hidden border border-slate-700/50 hover:border-emerald-500/30 transition-all relative group/img">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={report.image_url} alt="Foto sampah" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
                       <IconEye size={18} className="text-white" />
