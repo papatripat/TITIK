@@ -152,6 +152,19 @@ export default function AdminDashboard() {
     severity3: reports.filter((r) => r.severity === 3).length,
   };
 
+  const reportsByDate = reports.reduce((acc, report) => {
+    const date = new Date(report.created_at).toLocaleDateString('id-ID', { month: 'short', day: 'numeric' });
+    acc[date] = (acc[date] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+  const trendData = Object.entries(reportsByDate).map(([date, count]) => ({ name: date, value: count }));
+
+  const confidenceData = [
+    { name: 'Tinggi (>90%)', value: reports.filter((r) => r.confidence > 90).length, color: '#3b82f6' },
+    { name: 'Sedang (70-90%)', value: reports.filter((r) => r.confidence >= 70 && r.confidence <= 90).length, color: '#8b5cf6' },
+    { name: 'Rendah (<70%)', value: reports.filter((r) => r.confidence < 70).length, color: '#f43f5e' },
+  ];
+
   // ─── Loading / Guard ─────────────────────────────────────────────────────────
   if (authLoading || role !== 'admin') {
     return (
@@ -247,8 +260,30 @@ export default function AdminDashboard() {
         </div>
       </div>
 
+      {/* Stats Summary */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4" style={{ fontFamily: 'var(--font-geist-sans), system-ui, sans-serif' }}>
+        <div className="glass-card p-4 rounded-xl border border-emerald-500/20">
+          <p className="text-slate-400 text-sm">Total Laporan</p>
+          <p className="text-2xl font-bold text-white">{stats.total}</p>
+        </div>
+        <div className="glass-card p-4 rounded-xl border border-red-500/20">
+          <p className="text-slate-400 text-sm">Lokasi Kotor (Berat)</p>
+          <p className="text-2xl font-bold text-white">{stats.severity3}</p>
+        </div>
+        <div className="glass-card p-4 rounded-xl border border-amber-500/20">
+          <p className="text-slate-400 text-sm">Lokasi Kotor (Sedang)</p>
+          <p className="text-2xl font-bold text-white">{stats.severity2}</p>
+        </div>
+        <div className="glass-card p-4 rounded-xl border border-cyan-500/20">
+          <p className="text-slate-400 text-sm">Rata-rata Akurasi AI</p>
+          <p className="text-2xl font-bold text-white">
+            {reports.length > 0 ? Math.round(reports.reduce((acc, r) => acc + r.confidence, 0) / reports.length) : 0}%
+          </p>
+        </div>
+      </div>
+
       {/* Analytics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{ fontFamily: 'var(--font-geist-sans), system-ui, sans-serif' }}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6" style={{ fontFamily: 'var(--font-geist-sans), system-ui, sans-serif' }}>
         {/* Chart 1: Severity */}
         <div className="glass-card p-6 rounded-2xl">
           <h3 className="text-lg font-semibold text-white mb-6">
@@ -326,6 +361,74 @@ export default function AdminDashboard() {
                   barSize={40}
                 />
               </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Chart 3: Tren Laporan */}
+        <div className="glass-card p-6 rounded-2xl">
+          <h3 className="text-lg font-semibold text-white mb-6">
+            Tren Laporan Masuk
+          </h3>
+          <div className="h-64 w-full min-w-0">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
+              <BarChart 
+                data={trendData} 
+                margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
+              >
+                <XAxis 
+                  dataKey="name" 
+                  axisLine={false} 
+                  tickLine={false} 
+                  tick={{ fill: '#94a3b8', fontSize: 12 }} 
+                  dy={10}
+                />
+                <YAxis 
+                  axisLine={false} 
+                  tickLine={false} 
+                  tick={{ fill: '#94a3b8', fontSize: 12 }} 
+                  allowDecimals={false}
+                />
+                <RechartsTooltip 
+                  cursor={{ fill: 'rgba(255,255,255,0.05)' }}
+                  contentStyle={{ backgroundColor: '#0b1120', border: '1px solid rgba(51, 65, 85, 0.5)', borderRadius: '8px', color: '#fff' }}
+                />
+                <Bar 
+                  dataKey="value" 
+                  fill="#8b5cf6" 
+                  radius={[4, 4, 0, 0]} 
+                  barSize={40}
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Chart 4: Confidence */}
+        <div className="glass-card p-6 rounded-2xl">
+          <h3 className="text-lg font-semibold text-white mb-6">
+            Tingkat Kepercayaan Deteksi AI
+          </h3>
+          <div className="h-64 w-full min-w-0">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
+              <PieChart>
+                <Pie
+                  data={confidenceData}
+                  innerRadius={0}
+                  outerRadius={80}
+                  dataKey="value"
+                  stroke="none"
+                >
+                  {confidenceData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <RechartsTooltip 
+                  contentStyle={{ backgroundColor: '#0b1120', border: '1px solid rgba(51, 65, 85, 0.5)', borderRadius: '8px', color: '#fff' }}
+                  itemStyle={{ color: '#fff' }}
+                />
+                <Legend iconType="circle" wrapperStyle={{ fontSize: '14px', color: '#94a3b8' }} />
+              </PieChart>
             </ResponsiveContainer>
           </div>
         </div>
