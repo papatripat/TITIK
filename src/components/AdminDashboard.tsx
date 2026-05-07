@@ -42,7 +42,7 @@ export default function AdminDashboard() {
 
   // ─── Auth Guard ──────────────────────────────────────────────────────────────
   useEffect(() => {
-    if (!authLoading && role !== 'admin') {
+    if (!authLoading && (role as string) !== 'admin') {
       router.replace('/login');
     }
   }, [role, authLoading, router]);
@@ -69,7 +69,7 @@ export default function AdminDashboard() {
   }, []);
 
   useEffect(() => {
-    if (role === 'admin') {
+    if ((role as string) === 'admin') {
       fetchReports();
     }
   }, [role, fetchReports]);
@@ -165,7 +165,7 @@ export default function AdminDashboard() {
   ];
 
   // ─── Loading / Guard ─────────────────────────────────────────────────────────
-  if (authLoading || role !== 'admin') {
+  if (authLoading || (role as string) !== 'admin') {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center space-y-4">
