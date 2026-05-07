@@ -87,7 +87,7 @@ export default function ProfilePage() {
   if (!email) return null; // Will redirect
 
   // If user is admin, show the Admin Dashboard directly
-  if (role === 'admin') {
+  if ((role as string) === 'admin') {
     return (
       <div className="min-h-screen pt-24 pb-12 px-4 animate-fade-in">
         <div className="max-w-7xl mx-auto">
@@ -127,7 +127,7 @@ export default function ProfilePage() {
               
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-4">
                 <span className="px-3 py-1 bg-slate-800 border border-slate-700 rounded-full text-xs font-medium text-slate-300">
-                  Role: <span className={role === 'admin' ? 'text-amber-400' : 'text-emerald-400'}>{role.toUpperCase()}</span>
+                  Role: <span className={(role as string) === 'admin' ? 'text-amber-400' : 'text-emerald-400'}>{role.toUpperCase()}</span>
                 </span>
                 <span className="px-3 py-1 bg-slate-800 border border-slate-700 rounded-full text-xs font-medium text-slate-300">
                   Bergabung: {new Date().toLocaleDateString('id-ID', { month: 'long', year: 'numeric' })}
