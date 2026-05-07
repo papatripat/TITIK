@@ -254,8 +254,8 @@ export default function AdminDashboard() {
           <h3 className="text-lg font-semibold text-white mb-6">
             Tingkat Keparahan Laporan
           </h3>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
+          <div className="h-64 w-full min-w-0">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
               <PieChart>
                 <Pie
                   data={[
@@ -292,8 +292,8 @@ export default function AdminDashboard() {
           <h3 className="text-lg font-semibold text-white mb-6">
             Sebaran Jenis Sampah
           </h3>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
+          <div className="h-64 w-full min-w-0">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
               <BarChart 
                 data={[
                   { name: 'Plastik', value: reports.filter((r) => r.waste_type === 'plastic').length },
