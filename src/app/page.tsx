@@ -26,7 +26,7 @@ export default function Home() {
               Your Small
               <span className="inline-block align-middle mx-3 sm:mx-6 w-28 h-12 sm:w-48 sm:h-24 rounded-full overflow-hidden border-[3px] sm:border-[4px] border-slate-800/80 shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:scale-105 transition-transform duration-500">
                 <img
-                  src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80"
+                  src="/tong.webp"
                   alt="Beautiful Nature"
                   className="w-full h-full object-cover scale-110"
                 />

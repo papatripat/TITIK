@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   description:
     "Laporkan sampah ilegal di sekitarmu. AI akan menganalisis dan memetakan lokasi untuk penanganan yang lebih cepat.",
   keywords: ["sampah", "ilegal", "pemetaan", "AI", "laporan", "lingkungan"],
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 import Providers from "@/components/Providers";
